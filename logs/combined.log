@@ -1,0 +1,96 @@
+[2025-04-18T02:20:34.147Z] info: Sending request to Google Distance Matrix API
+[2025-04-18T02:20:34.501Z] info: Distance calculated: 2.54 km between 140 Charles Street G21 2QB and 26 Avonspark St, Glasgow G21 4NL
+[2025-04-18T02:25:54.879Z] info: Sending request to Google Distance Matrix API
+[2025-04-18T02:25:55.038Z] info: Distance calculated: 2.54 km between 140 Charles Street G21 2QB and 26 Avonspark St, Glasgow G21 4NL
+[2025-04-18T02:26:00.120Z] info: Sending request to Google Distance Matrix API
+[2025-04-18T02:26:00.226Z] info: Distance calculated: 2.54 km between 140 Charles Street G21 2QB and 26 Avonspark St, Glasgow G21 4NL
+[2025-04-18T02:31:00.849Z] info: Sending request to Google Distance Matrix API
+[2025-04-18T02:31:01.098Z] info: Distance calculated: 1.353 km between 2 Ayr St, Glasgow G21 4DA and 26 Avonspark St, Glasgow G21 4NL
+[2025-04-18T02:31:02.067Z] info: Sending request to Google Distance Matrix API
+[2025-04-18T02:31:02.123Z] info: Distance calculated: 1.353 km between 2 Ayr St, Glasgow G21 4DA and 26 Avonspark St, Glasgow G21 4NL
+[2025-04-18T02:31:03.545Z] info: Sending request to Google Distance Matrix API
+[2025-04-18T02:31:03.579Z] info: Distance calculated: 1.353 km between 2 Ayr St, Glasgow G21 4DA and 26 Avonspark St, Glasgow G21 4NL
+[2025-04-18T02:31:04.979Z] info: Sending request to Google Distance Matrix API
+[2025-04-18T02:31:05.019Z] info: Distance calculated: 1.353 km between 2 Ayr St, Glasgow G21 4DA and 26 Avonspark St, Glasgow G21 4NL
+[2025-04-18T02:39:00.400Z] info: Sending request to Google Distance Matrix API
+[2025-04-18T02:39:00.745Z] info: Distance calculated: 347.501 km between 140 Charles Street G21 2QB and 4100 Park Approach, Leeds LS15 8GB
+[2025-04-18T02:39:02.416Z] info: Sending request to Google Distance Matrix API
+[2025-04-18T02:39:02.508Z] info: Distance calculated: 347.501 km between 140 Charles Street G21 2QB and 4100 Park Approach, Leeds LS15 8GB
+[2025-04-18T02:39:04.705Z] info: Sending request to Google Distance Matrix API
+[2025-04-18T02:39:04.763Z] info: Distance calculated: 347.501 km between 140 Charles Street G21 2QB and 4100 Park Approach, Leeds LS15 8GB
+[2025-04-18T02:39:06.342Z] info: Sending request to Google Distance Matrix API
+[2025-04-18T02:39:06.398Z] info: Distance calculated: 347.501 km between 140 Charles Street G21 2QB and 4100 Park Approach, Leeds LS15 8GB
+[2025-04-18T02:39:08.099Z] info: Sending request to Google Distance Matrix API
+[2025-04-18T02:39:08.135Z] info: Distance calculated: 347.501 km between 140 Charles Street G21 2QB and 4100 Park Approach, Leeds LS15 8GB
+[2025-04-18T02:39:17.800Z] info: Sending request to Google Distance Matrix API
+[2025-04-18T02:39:17.881Z] info: Distance calculated: 347.501 km between 140 Charles Street G21 2QB and 4100 Park Approach, Leeds LS15 8GB
+[2025-04-18T02:55:56.594Z] info: Sending request to Google Distance Matrix API
+[2025-04-18T02:55:56.902Z] info: Distance calculated: 348.583 km between 2 Ayr St, Glasgow G21 4DA and 4100 Park Approach, Leeds LS15 8GB
+[2025-04-18T03:00:12.210Z] info: Sending request to Google Distance Matrix API
+[2025-04-18T03:00:12.397Z] info: Distance calculated: 1.353 km between 2 Ayr St, Glasgow G21 4DA and 26 Avonspark St, Glasgow G21 4NL
+[2025-04-18T03:00:18.305Z] info: Sending request to Google Distance Matrix API
+[2025-04-18T03:00:18.411Z] info: Distance calculated: 1.353 km between 2 Ayr St, Glasgow G21 4DA and 26 Avonspark St, Glasgow G21 4NL
+[2025-04-18T03:00:19.971Z] info: Sending request to Google Distance Matrix API
+[2025-04-18T03:00:20.027Z] info: Distance calculated: 1.353 km between 2 Ayr St, Glasgow G21 4DA and 26 Avonspark St, Glasgow G21 4NL
+[2025-04-18T03:00:21.810Z] info: Sending request to Google Distance Matrix API
+[2025-04-18T03:00:21.866Z] info: Distance calculated: 1.353 km between 2 Ayr St, Glasgow G21 4DA and 26 Avonspark St, Glasgow G21 4NL
+[2025-04-18T04:04:37.016Z] info: Sending request to Google Distance Matrix API
+[2025-04-18T04:04:37.327Z] info: Distance calculated: 347.458 km between 14 Avonspark St, Glasgow G21 4NL and 4100 Park Approach, Leeds LS15 8GB
+[2025-04-18T04:04:42.017Z] info: Sending request to Google Distance Matrix API
+[2025-04-18T04:04:42.120Z] info: Distance calculated: 347.458 km between 14 Avonspark St, Glasgow G21 4NL and 4100 Park Approach, Leeds LS15 8GB
+[2025-04-18T04:16:09.116Z] info: Sending request to Google Distance Matrix API
+[2025-04-18T04:16:09.802Z] info: Distance calculated: 347.501 km between 140 Charles Street G21 2QB and 4100 Park Approach, Leeds LS15 8GB
+[2025-04-18T16:02:50.062Z] info: Sending request to Google Distance Matrix API
+[2025-04-18T16:02:50.295Z] info: Distance calculated: 0.038 km between 14 Avonspark St, Glasgow G21 4NL and 26 Avonspark St, Glasgow G21 4NL
+[2025-04-18T16:09:21.548Z] info: Sending request to Google Distance Matrix API
+[2025-04-18T16:09:21.762Z] info: Distance calculated: 21.155 km between 2 Ayr St, Glasgow G21 4DA and 14 Queen street PA1 2TU
+[2025-04-18T16:15:09.388Z] info: Sending request to Google Distance Matrix API
+[2025-04-18T16:15:09.535Z] info: Distance calculated: 0.038 km between 14 Avonspark St, Glasgow G21 4NL and 26 Avonspark St, Glasgow G21 4NL
+[2025-04-18T16:56:21.797Z] info: Sending request to Google Distance Matrix API
+[2025-04-18T16:56:22.057Z] info: Distance calculated: 0.038 km between 14 Avonspark St, Glasgow G21 4NL and 26 Avonspark St, Glasgow G21 4NL
+[2025-04-18T16:57:55.499Z] info: Sending request to Google Distance Matrix API
+[2025-04-18T16:57:55.698Z] info: Distance calculated: 1.353 km between 2 Ayr St, Glasgow G21 4DA and 26 Avonspark St, Glasgow G21 4NL
+[2025-04-18T17:30:00.277Z] info: Sending request to Google Distance Matrix API
+[2025-04-18T17:30:00.491Z] info: Distance calculated: 21.516 km between 14 Queen street PA1 2TU and 26 Avonspark St, Glasgow G21 4NL
+[2025-04-18T18:05:31.221Z] info: Sending request to Google Distance Matrix API
+[2025-04-18T18:05:31.558Z] info: Distance calculated: 361.486 km between 14 Queen street PA1 2TU and 4100 Park Approach, Leeds LS15 8GB
+[2025-04-18T18:26:34.324Z] info: Sending request to Google Distance Matrix API
+[2025-04-18T18:26:34.585Z] info: Distance calculated: 21.546 km between 14 Avonspark St, Glasgow G21 4NL and 14 Queen street PA1 2TU
+[2025-04-18T18:26:38.769Z] info: ✅ Creating Stripe checkout session
+[2025-04-18T18:26:39.673Z] info: ✅ Checkout session created successfully
+[2025-04-18T18:27:35.209Z] info: Sending request to Google Distance Matrix API
+[2025-04-18T18:27:35.422Z] info: Distance calculated: 1.353 km between 2 Ayr St, Glasgow G21 4DA and 26 Avonspark St, Glasgow G21 4NL
+[2025-04-18T18:27:39.196Z] info: Sending request to Google Distance Matrix API
+[2025-04-18T18:27:39.264Z] info: Distance calculated: 1.353 km between 2 Ayr St, Glasgow G21 4DA and 26 Avonspark St, Glasgow G21 4NL
+[2025-04-18T18:27:47.749Z] info: ✅ Creating Stripe checkout session
+[2025-04-18T18:27:48.197Z] info: ✅ Checkout session created successfully
+[2025-04-18T18:39:30.869Z] info: Sending request to Google Distance Matrix API
+[2025-04-18T18:39:31.043Z] info: Distance calculated: 1.353 km between 2 Ayr St, Glasgow G21 4DA and 26 Avonspark St, Glasgow G21 4NL
+[2025-04-18T18:39:35.662Z] info: ✅ Creating Stripe checkout session
+[2025-04-18T18:39:36.219Z] info: ✅ Checkout session created successfully
+[2025-04-18T18:48:28.597Z] info: Sending request to Google Distance Matrix API
+[2025-04-18T18:48:28.838Z] info: Distance calculated: 348.583 km between 2 Ayr St, Glasgow G21 4DA and 4100 Park Approach, Leeds LS15 8GB
+[2025-04-18T18:48:30.560Z] info: Sending request to Google Distance Matrix API
+[2025-04-18T18:48:30.617Z] info: Distance calculated: 348.583 km between 2 Ayr St, Glasgow G21 4DA and 4100 Park Approach, Leeds LS15 8GB
+[2025-04-18T18:48:35.481Z] info: ✅ Creating Stripe checkout session
+[2025-04-18T18:48:36.042Z] info: ✅ Checkout session created successfully
+[2025-04-18T19:02:49.329Z] info: Sending request to Google Distance Matrix API
+[2025-04-18T19:02:49.679Z] info: Distance calculated: 1.353 km between 2 Ayr St, Glasgow G21 4DA and 26 Avonspark St, Glasgow G21 4NL
+[2025-04-18T19:02:54.256Z] info: ✅ Creating Stripe checkout session
+[2025-04-18T19:02:54.801Z] info: ✅ Checkout session created successfully
+[2025-04-18T19:06:30.044Z] info: ✅ Creating Stripe checkout session
+[2025-04-18T19:06:30.599Z] info: ✅ Checkout session created successfully
+[2025-04-18T19:39:51.134Z] info: ✅ Creating Stripe checkout session
+[2025-04-18T19:39:52.197Z] info: ✅ Checkout session created successfully
+[2025-04-18T20:26:50.667Z] info: ✅ Creating Stripe checkout session
+[2025-04-18T20:26:51.346Z] info: ✅ Checkout session created successfully
+[2025-04-18T20:42:00.013Z] info: ✅ Creating Stripe checkout session
+[2025-04-18T20:42:00.638Z] info: ✅ Checkout session created successfully
+[2025-04-18T20:43:22.269Z] info: ✅ Creating Stripe checkout session
+[2025-04-18T20:43:22.830Z] info: ✅ Checkout session created successfully
+[2025-04-18T22:25:34.216Z] info: ✅ Creating Stripe checkout session
+[2025-04-18T22:25:34.853Z] info: ✅ Checkout session created successfully
+[2025-04-18T22:27:51.125Z] info: ✅ Creating Stripe checkout session
+[2025-04-18T22:27:51.683Z] info: ✅ Checkout session created successfully
+[2025-04-18T22:29:28.960Z] info: ✅ Creating Stripe checkout session
+[2025-04-18T22:29:29.512Z] info: ✅ Checkout session created successfully

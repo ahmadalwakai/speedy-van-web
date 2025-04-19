@@ -1,0 +1,13 @@
+{
+  "guest": "Guest",
+  "bookOrder": "Book Order",
+  "orderHistory": "Order History",
+  "login": "Login",
+  "register": "Register",
+  "email": "Email",
+  "emailPlaceholder": "Enter your email",
+  "password": "Password",
+  "passwordPlaceholder": "Enter your password",
+  "username": "Username",
+  "usernamePlaceholder": "Enter your username"
+}

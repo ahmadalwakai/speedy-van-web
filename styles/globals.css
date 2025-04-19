@@ -1,0 +1,45 @@
+import React from 'react';
+import { Box, Badge, VStack, Text } from '@chakra-ui/react';
+
+// تعريف نوع الحالة
+const orderStatus = {
+  pending: { label: 'قيد الحجز', color: 'yellow' },
+  paid: { label: 'تم الدفع', color: 'green' },
+  delivered: { label: 'تم التوصيل', color: 'blue' },
+  canceled: { label: 'ملغي', color: 'red' },
+} as const;
+
+type OrderStatusKey = keyof typeof orderStatus;
+
+const OrderStatusBadge: React.FC<{ status: OrderStatusKey }> = ({ status }) => {
+  const { label, color } = orderStatus[status];
+
+  return (
+    <Badge colorScheme={color} p={2} borderRadius="md">
+      {label}
+    </Badge>
+  );
+};
+
+// استخدم النوع الصريح هنا أيضًا
+const orders: { id: string; status: OrderStatusKey }[] = [
+  { id: '1', status: 'pending' },
+  { id: '2', status: 'paid' },
+  { id: '3', status: 'delivered' },
+  { id: '4', status: 'canceled' },
+];
+
+const OrderList: React.FC = () => {
+  return (
+    <VStack spacing={4}>
+      {orders.map((order) => (
+        <Box key={order.id} p={4} borderWidth="1px" borderRadius="lg">
+          <Text>رقم الطلب: {order.id}</Text>
+          <OrderStatusBadge status={order.status} />
+        </Box>
+      ))}
+    </VStack>
+  );
+};
+
+export default OrderList;

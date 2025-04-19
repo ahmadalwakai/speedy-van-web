@@ -1,0 +1,13 @@
+{
+    "guest": "زائر",
+    "bookOrder": "حجز طلب",
+    "orderHistory": "سجل الطلبات",
+    "login": "تسجيل الدخول",
+    "register": "التسجيل",
+    "email": "البريد الإلكتروني",
+    "emailPlaceholder": "أدخل بريدك الإلكتروني",
+    "password": "كلمة المرور",
+    "passwordPlaceholder": "أدخل كلمة المرور",
+    "username": "اسم المستخدم",
+    "usernamePlaceholder": "أدخل اسم المستخدم"
+  }
