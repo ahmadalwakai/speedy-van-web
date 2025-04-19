@@ -3,7 +3,7 @@ import Stripe from 'stripe';
 import logger from '@/services/logger';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || '', {
-  apiVersion: '2022-11-15',
+  apiVersion: '2025-02-24.acacia',
 });
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {

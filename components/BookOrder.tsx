@@ -40,35 +40,65 @@ import debounce from 'lodash/debounce';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
-// حل مشكلة useLayoutEffect في SSR
+// Solve useLayoutEffect issue in SSR
 const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? React.useLayoutEffect : React.useEffect;
 
-interface Item {
+// Define the Item interface
+export interface Item {
   type: string;
   size: string;
   quantity: number;
 }
 
-interface FormData {
-  firstName: string;
-  lastName: string;
-  phoneNumber: string;
-  email: string;
-  pickupAddress: string;
-  pickupFloor: string;
-  pickupLift: boolean;
-  dropoffAddress: string;
-  dropoffFloor: string;
-  dropoffLift: boolean;
-  serviceType: string;
-  description?: string;
-  pickupDateTime: string;
-  items: Item[];
-  workers: number;
-  images: File[];
-  status: string;
-  coupon?: string;
-}
+// Define the schema
+export const schema = yup.object({
+  firstName: yup
+    .string()
+    .matches(/^[A-Za-z\s]+$/, 'Invalid first name')
+    .min(2, 'First name must be at least 2 characters')
+    .max(50, 'First name must not exceed 50 characters')
+    .required('First name is required'),
+  lastName: yup
+    .string()
+    .matches(/^[A-Za-z\s]+$/, 'Invalid last name')
+    .min(2, 'Last name must be at least 2 characters')
+    .max(50, 'Last name must not exceed 50 characters')
+    .required('Last name is required'),
+  phoneNumber: yup
+    .string()
+    .matches(/^(\+44|0)7\d{9}$/, 'Invalid phone number')
+    .required('Phone number is required'),
+  email: yup
+    .string()
+    .email('Invalid email address')
+    .required('Email is required'),
+  pickupAddress: yup.string().required('Pickup address is required'),
+  pickupFloor: yup.string().required('Pickup floor is required'),
+  pickupLift: yup.boolean().default(false),
+  dropoffAddress: yup.string().required('Dropoff address is required'),
+  dropoffFloor: yup.string().required('Dropoff floor is required'),
+  dropoffLift: yup.boolean().default(false),
+  serviceType: yup.string().required('Service type is required'),
+  description: yup.string().optional(),
+  pickupDateTime: yup.string().required('Pickup date and time are required'),
+  workers: yup.number().min(1, 'At least one worker is required').required('Workers are required'),
+  items: yup
+    .array()
+    .of(
+      yup.object().shape({
+        type: yup.string().required('Item type is required'),
+        size: yup.string().required('Item size is required'),
+        quantity: yup.number().min(1, 'Quantity must be at least 1').required('Quantity is required'),
+      })
+    )
+    .min(1, 'At least one item is required'),
+  images: yup.array().of(yup.mixed()).optional(),
+  status: yup.string().default('pending'),
+  coupon: yup.string().optional(),
+});
+
+// Infer FormData type from schema
+type FormData = yup.InferType<typeof schema>;
 
 const handleError = (toast: any, logger: any, title: string, description: string, status: 'error' | 'warning' = 'error') => {
   logger.error(`${title}: ${description}`);
@@ -187,7 +217,7 @@ const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY!);
 const calculatePrice = async ({ distance, items, workers }: { distance: number; items: Item[]; workers: number }) => {
   const basePrice = 20;
   const distanceCost = distance * 0.5;
-  
+
   const itemCost = items.reduce((total, item) => {
     const itemPrices: Record<string, Record<string, number>> = {
       chair: { small: 5, medium: 10, large: 15, 'x-large': 20 },
@@ -197,11 +227,11 @@ const calculatePrice = async ({ distance, items, workers }: { distance: number; 
       washingMachine: { small: 25, medium: 35, large: 45, 'x-large': 55 },
       tv: { small: 15, medium: 25, large: 35, 'x-large': 45 },
       fan: { small: 5, medium: 10, large: 15, 'x-large': 20 },
-      sofa: { small: 30, medium: 45, large: 60, 'x-large': 75 }
+      sofa: { small: 30, medium: 45, large: 60, 'x-large': 75 },
     };
-    
+
     const price = itemPrices[item.type]?.[item.size] || 0;
-    return total + (price * item.quantity);
+    return total + price * item.quantity;
   }, 0);
 
   const workerCost = workers > 1 ? (workers - 1) * 20 : 0;
@@ -214,12 +244,12 @@ const calculatePrice = async ({ distance, items, workers }: { distance: number; 
       basePrice,
       distanceCost,
       itemCost,
-      workerCost
-    }
+      workerCost,
+    },
   };
 };
 
-const BookOrder: React.FC = () => {
+const BookOrder: React.FC<{}> = () => {
   const { t } = useTranslation(['common', 'order']);
   const router = useRouter();
   const toast = useToast();
@@ -228,7 +258,7 @@ const BookOrder: React.FC = () => {
   const [items, setItems] = useState<Item[]>([{ type: '', size: '', quantity: 1 }]);
   const [images, setImages] = useState<File[]>([]);
   const [orderId] = useState(uuidv4());
-  const [orderStatus, setOrderStatus] = useState('pending');
+  const [orderStatus, setOrderStatus] = useState<'pending' | 'paid' | 'delivered' | 'canceled'>('pending');
   const [coupon, setCoupon] = useState('');
   const [currentStep, setCurrentStep] = useState(0);
   const pickupInputRef = useRef<HTMLInputElement>(null);
@@ -256,58 +286,13 @@ const BookOrder: React.FC = () => {
     },
   });
 
-  const schema = yup.object().shape({
-    firstName: yup
-      .string()
-      .matches(/^[A-Za-z\s]+$/, t('order:invalidFirstName'))
-      .min(2, t('order:firstNameMin'))
-      .max(50, t('order:firstNameMax'))
-      .required(t('order:firstNameRequired')),
-    lastName: yup
-      .string()
-      .matches(/^[A-Za-z\s]+$/, t('order:invalidLastName'))
-      .min(2, t('order:lastNameMin'))
-      .max(50, t('order:lastNameMax'))
-      .required(t('order:lastNameRequired')),
-    phoneNumber: yup
-      .string()
-      .matches(/^(\+44|0)7\d{9}$/, t('order:invalidPhoneNumber'))
-      .required(t('order:phoneNumberRequired')),
-    email: yup
-      .string()
-      .email(t('order:invalidEmail'))
-      .required(t('order:emailRequired')),
-    pickupAddress: yup.string().required(t('order:pickupAddressRequired')),
-    pickupFloor: yup.string().required(t('order:pickupFloorRequired')),
-    pickupLift: yup.boolean().default(false),
-    dropoffAddress: yup.string().required(t('order:dropoffAddressRequired')),
-    dropoffFloor: yup.string().required(t('order:dropoffFloorRequired')),
-    dropoffLift: yup.boolean().default(false),
-    serviceType: yup.string().required(t('order:serviceTypeRequired')),
-    description: yup.string().optional(),
-    pickupDateTime: yup.string().required(t('order:pickupDateTimeRequired')),
-    workers: yup.number().min(1, t('order:workersMin')).required(t('order:workersRequired')),
-    items: yup
-      .array()
-      .of(
-        yup.object().shape({
-          type: yup.string().required(t('order:itemTypeRequired')),
-          size: yup.string().required(t('order:itemSizeRequired')),
-          quantity: yup.number().min(1, t('order:quantityMin')).required(t('order:quantityRequired')),
-        })
-      )
-      .min(1, t('order:itemsRequired')),
-    images: yup.array().of(yup.mixed()).optional(),
-    status: yup.string().default('pending'),
-    coupon: yup.string().optional(),
-  });
-
   const {
     control,
     handleSubmit,
     formState: { errors },
     watch,
     setValue,
+    getValues,
     reset,
   } = useForm<FormData>({
     resolver: yupResolver(schema),
@@ -325,8 +310,8 @@ const BookOrder: React.FC = () => {
       serviceType: '',
       description: '',
       pickupDateTime: '',
-      items: [{ type: '', size: '', quantity: 1 }],
       workers: 1,
+      items: [{ type: '', size: '', quantity: 1 }],
       images: [],
       status: 'pending',
       coupon: '',
@@ -337,7 +322,6 @@ const BookOrder: React.FC = () => {
   const dropoffAddress = watch('dropoffAddress');
   const workers = watch('workers');
 
-  // استخدمنا useIsomorphicLayoutEffect بدلاً من useEffect للتعامل مع Google Maps
   useIsomorphicLayoutEffect(() => {
     if (!isLoaded || !pickupInputRef.current || !dropoffInputRef.current) return;
 
@@ -424,48 +408,52 @@ const BookOrder: React.FC = () => {
     return () => debouncedSaveDraft.cancel();
   }, [watch, debouncedSaveDraft]);
 
-  const calculateDistanceAndPrice = useMemo(() => debounce(async () => {
-    try {
-      if (!isLoaded || !pickupAddress || !dropoffAddress) {
-        if (!pickupAddress || !dropoffAddress) {
-          handleError(toast, logger, t('order:priceCalculationWarning'), t('order:missingAddresses'), 'warning');
+  const calculateDistanceAndPrice = useMemo(
+    () =>
+      debounce(async () => {
+        try {
+          if (!isLoaded || !pickupAddress || !dropoffAddress) {
+            if (!pickupAddress || !dropoffAddress) {
+              handleError(toast, logger, t('order:priceCalculationWarning'), t('order:missingAddresses'), 'warning');
+            }
+            setTotalPrice({ total: 0, details: null });
+            return;
+          }
+
+          const hasValidItem = items.some((item) => item.type && item.size);
+          if (!hasValidItem) {
+            handleError(toast, logger, t('order:priceCalculationWarning'), t('order:noValidItems'), 'warning');
+            setTotalPrice({ total: 0, details: null });
+            return;
+          }
+
+          logger.info('Initiating distance calculation', { pickupAddress, dropoffAddress });
+
+          const distance = await calculateDistance(pickupAddress, dropoffAddress);
+          if (typeof distance !== 'number' || distance <= 0) {
+            logger.error('Invalid distance value received', { distance });
+            throw new Error('Invalid distance value calculated');
+          }
+
+          logger.info('Distance calculated successfully:', { distance: `${distance} km` });
+
+          const validItems = items.filter((item) => item.type && item.size);
+          logger.info('Calculating price with:', { distance, validItems, workers });
+          const price = await calculatePrice({ distance, items: validItems, workers });
+          if (!price || !price.total || price.total <= 0) {
+            logger.error('Invalid price returned from calculatePrice:', { price });
+            throw new Error('Invalid price calculated');
+          }
+          logger.info('Price calculated successfully:', { price });
+
+          setTotalPrice(price);
+        } catch (error: any) {
+          handleError(toast, logger, t('order:errorMessage'), t('order:priceCalculationError', { error: error.message }));
+          setTotalPrice({ total: 0, details: null });
         }
-        setTotalPrice({ total: 0, details: null });
-        return;
-      }
-
-      const hasValidItem = items.some(item => item.type && item.size);
-      if (!hasValidItem) {
-        handleError(toast, logger, t('order:priceCalculationWarning'), t('order:noValidItems'), 'warning');
-        setTotalPrice({ total: 0, details: null });
-        return;
-      }
-
-      logger.info('Initiating distance calculation', { pickupAddress, dropoffAddress });
-
-      const distance = await calculateDistance(pickupAddress, dropoffAddress);
-      if (typeof distance !== 'number' || distance <= 0) {
-        logger.error('Invalid distance value received', { distance });
-        throw new Error('Invalid distance value calculated');
-      }
-
-      logger.info('Distance calculated successfully:', { distance: `${distance} km` });
-
-      const validItems = items.filter(item => item.type && item.size);
-      logger.info('Calculating price with:', { distance, validItems, workers });
-      const price = await calculatePrice({ distance, items: validItems, workers });
-      if (!price || !price.total || price.total <= 0) {
-        logger.error('Invalid price returned from calculatePrice:', { price });
-        throw new Error('Invalid price calculated');
-      }
-      logger.info('Price calculated successfully:', { price });
-
-      setTotalPrice(price);
-    } catch (error: any) {
-      handleError(toast, logger, t('order:errorMessage'), t('order:priceCalculationError', { error: error.message }));
-      setTotalPrice({ total: 0, details: null });
-    }
-  }, 500), [pickupAddress, dropoffAddress, items, workers, toast, t, isLoaded]);
+      }, 500),
+    [pickupAddress, dropoffAddress, items, workers, toast, t, isLoaded]
+  );
 
   useEffect(() => {
     logger.info('Triggering price calculation', { pickupAddress, dropoffAddress, items, workers });
@@ -481,7 +469,7 @@ const BookOrder: React.FC = () => {
         totalPrice: totalPrice.total,
         locale: router.locale,
         items,
-        images: images.map(file => file.name),
+        images: images.map((file) => file.name),
         status: 'pending',
         orderId,
       };
@@ -570,7 +558,7 @@ const BookOrder: React.FC = () => {
   return (
     <Box minH="100vh" p={4} bg={bgColor} dir={router.locale === 'ar' ? 'rtl' : 'ltr'} aria-label="Delivery booking form">
       <Button
-        as="button"
+        as="a"
         href="tel:+447901846297"
         colorScheme="blue"
         leftIcon={<FiPhone />}
@@ -671,10 +659,8 @@ const BookOrder: React.FC = () => {
                       render={({ field }) => (
                         <Input
                           {...field}
-                          ref={(e) => {
-                            pickupInputRef.current = e;
-                            field.ref(e);
-                          }}
+                          ref={pickupInputRef}
+                          onChange={(e) => field.onChange(e.target.value)}
                           placeholder={t('order:enterPickupAddressManually')}
                           aria-label={t('order:pickupAddress')}
                         />
@@ -697,7 +683,14 @@ const BookOrder: React.FC = () => {
                       <Controller
                         name="pickupLift"
                         control={control}
-                        render={({ field }) => <Checkbox {...field} isChecked={field.value} aria-label={t('order:pickupLift')} />}
+                        render={({ field: { onChange, value, ...rest } }) => (
+                          <Checkbox
+                            {...rest}
+                            isChecked={value}
+                            onChange={onChange}
+                            aria-label={t('order:pickupLift')}
+                          />
+                        )}
                       />
                     </FormControl>
                   </SimpleGrid>
@@ -709,10 +702,8 @@ const BookOrder: React.FC = () => {
                       render={({ field }) => (
                         <Input
                           {...field}
-                          ref={(e) => {
-                            dropoffInputRef.current = e;
-                            field.ref(e);
-                          }}
+                          ref={dropoffInputRef}
+                          onChange={(e) => field.onChange(e.target.value)}
                           placeholder={t('order:enterDropoffAddressManually')}
                           aria-label={t('order:dropoffAddress')}
                         />
@@ -735,7 +726,14 @@ const BookOrder: React.FC = () => {
                       <Controller
                         name="dropoffLift"
                         control={control}
-                        render={({ field }) => <Checkbox {...field} isChecked={field.value} aria-label={t('order:dropoffLift')} />}
+                        render={({ field: { onChange, value, ...rest } }) => (
+                          <Checkbox
+                            {...rest}
+                            isChecked={value}
+                            onChange={onChange}
+                            aria-label={t('order:dropoffLift')}
+                          />
+                        )}
                       />
                     </FormControl>
                   </SimpleGrid>
@@ -749,7 +747,11 @@ const BookOrder: React.FC = () => {
                       name="serviceType"
                       control={control}
                       render={({ field }) => (
-                        <Select {...field} placeholder={t('order:serviceTypePlaceholder')} aria-label={t('order:serviceType')}>
+                        <Select
+                          {...field}
+                          placeholder={t('order:serviceTypePlaceholder')}
+                          aria-label={t('order:serviceType')}
+                        >
                           <option value="manWithVan">{t('order:manWithVan')}</option>
                           <option value="twoMenWithVan">{t('order:twoMenWithVan')}</option>
                         </Select>
@@ -805,7 +807,15 @@ const BookOrder: React.FC = () => {
                   <ItemsList items={items} errors={errors} setItems={setItems} setValue={setValue} t={t} />
                   <FormControl>
                     <FormLabel>{t('order:images')}</FormLabel>
-                    <Box {...getRootProps()} p={4} border="2px dashed" borderColor="gray.300" borderRadius="lg" textAlign="center" aria-label={t('order:images')}>
+                    <Box
+                      {...getRootProps()}
+                      p={4}
+                      border="2px dashed"
+                      borderColor="gray.300"
+                      borderRadius="lg"
+                      textAlign="center"
+                      aria-label={t('order:images')}
+                    >
                       <input {...getInputProps()} />
                       <Text>{t('order:dropImages')}</Text>
                     </Box>

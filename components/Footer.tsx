@@ -1,16 +1,23 @@
+const variants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+};
 import React from 'react';
 import { Box, Heading, Text, SimpleGrid, VStack, Button } from '@chakra-ui/react';
 import { useTranslation } from 'next-i18next';
 import NextLink from 'next/link';
-import { motion, useReducedMotion } from 'framer-motion';
+import { motion, useReducedMotion, Variants } from 'framer-motion';
 import { BookNowIcon, PhoneIcon } from './Icons';
 
 const Footer: React.FC = () => {
   const { t } = useTranslation(['home', 'common']);
   const shouldReduceMotion = useReducedMotion();
 
-  const variants = shouldReduceMotion
-    ? {}
+  const variants: Variants = shouldReduceMotion
+    ? {
+        hidden: { opacity: 1, y: 0 },
+        visible: { opacity: 1, y: 0 },
+      }
     : {
         hidden: { opacity: 0, y: 20 },
         visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
@@ -26,18 +33,22 @@ const Footer: React.FC = () => {
     >
       <Box
         as="footer"
-        bg="footer.bg"
+        backgroundColor="footer.bg"
         color="footer.text"
-        py={12}
-        px={{ base: 4, md: 8 }}
+        paddingY={12}
+        paddingX={{ base: 4, md: 8 }}
       >
-        <SimpleGrid columns={{ base: 1, md: 3 }} spacing={8} maxW="7xl" mx="auto">
+        <SimpleGrid columns={{ base: 1, md: 3 }} spacing={8} maxWidth="7xl" marginX="auto">
           <VStack align={{ base: 'center', md: 'start' }} spacing={4}>
             <Heading size="md">Speedy Van</Heading>
-            <Text>{t('home:footerAbout', { defaultValue: 'Fast and reliable delivery across the UK.' })}</Text>
+            <Text>
+              {t('home:footerAbout', { defaultValue: 'Fast and reliable delivery across the UK.' })}
+            </Text>
           </VStack>
           <VStack align={{ base: 'center', md: 'start' }} spacing={4}>
-            <Heading size="md">{t('home:footerLinks', { defaultValue: 'Quick Links' })}</Heading>
+            <Heading size="md">
+              {t('home:footerLinks', { defaultValue: 'Quick Links' })}
+            </Heading>
             <NextLink href="/about" passHref legacyBehavior>
               <Box as="a">{t('common:about', { defaultValue: 'About Us' })}</Box>
             </NextLink>
@@ -49,7 +60,9 @@ const Footer: React.FC = () => {
             </NextLink>
           </VStack>
           <VStack align={{ base: 'center', md: 'start' }} spacing={4}>
-            <Heading size="md">{t('home:footerContact', { defaultValue: 'Contact' })}</Heading>
+            <Heading size="md">
+              {t('home:footerContact', { defaultValue: 'Contact' })}
+            </Heading>
             <Text>Email: support@speedyvan.com</Text>
             <Text>Phone: +44 7901 846297</Text>
             <NextLink href="/book-order" passHref legacyBehavior>

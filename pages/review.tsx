@@ -1,5 +1,5 @@
-import React from 'react';
-import { Box, Heading, VStack, Button, Input, Textarea, useToast } from '@chakra-ui/react';
+import React, { useState } from 'react';
+import { Box, Heading, VStack, Button, Input, Textarea, useToast, Text } from '@chakra-ui/react';
 import { useTranslation } from 'next-i18next';
 import { GetStaticProps } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';

@@ -8,9 +8,6 @@ import Link from 'next/link';
 import { useAuthStore } from '@/stores/authStore';
 import logger from '@/services/logger';
 
-/**
- * Register page
- */
 const Register = () => {
   const { t } = useTranslation(['common', 'auth']);
   const [email, setEmail] = useState('');
@@ -19,7 +16,6 @@ const Register = () => {
   const { register, user } = useAuthStore();
   const router = useRouter();
 
-  // Redirect if already logged in
   React.useEffect(() => {
     if (user) {
       router.push('/');
@@ -29,7 +25,7 @@ const Register = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await register({ email, username, password });
+      await register(email, username, password);
       logger.info(`User registered: ${email}`);
       router.push('/login');
     } catch (error) {

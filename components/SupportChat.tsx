@@ -9,9 +9,10 @@ import {
   Icon,
   useColorModeValue,
   useDisclosure,
+  Heading,
 } from '@chakra-ui/react';
 import { useTranslation } from 'next-i18next';
-import { MessageSquareIcon } from './Icons';
+import { MessageSquareIcon, SendIcon } from './Icons';
 
 interface Message {
   id: string;
@@ -48,7 +49,6 @@ const SupportChat: React.FC = () => {
     setMessages((prev) => [...prev, userMessage]);
     setInput('');
 
-    // محاكاة استجابة الذكاء الاصطناعي (يمكن استبدالها بـ API مثل Dialogflow أو Grok)
     setTimeout(() => {
       const botResponse = generateBotResponse(input);
       setMessages((prev) => [...prev, { id: Date.now().toString(), text: botResponse, sender: 'bot' }]);

@@ -8,7 +8,6 @@ import nextI18NextConfig from '../next-i18next.config';
 import logger from '@/services/logger';
 import { useEffect } from 'react';
 
-// Child component to handle toast logic
 const AppContent: React.FC<{ googleApiKey?: string; children: React.ReactNode }> = ({ googleApiKey, children }) => {
   const toast = useToast();
 
@@ -36,16 +35,13 @@ function MyApp({ Component, pageProps }: AppProps) {
       {googleApiKey && (
         <Script
           id="google-maps"
-          strategy="after过后
-Interactive"
+          strategy="afterInteractive"
           src={`https://maps.googleapis.com/maps/api/js?key=${googleApiKey}&libraries=places`}
           onLoad={() => {
             logger.info('✅ Google Maps API loaded successfully');
-            // Use toast inside a component if needed
           }}
           onError={(error) => {
             logger.error(`❌ Failed to load Google Maps API: ${error.message}`, error);
-            // Use toast inside a component if needed
           }}
         />
       )}

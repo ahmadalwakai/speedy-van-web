@@ -1,7 +1,15 @@
 import React from 'react';
-import { Box, Heading, Accordion, AccordionItem, AccordionButton, AccordionPanel, AccordionIcon } from '@chakra-ui/react';
+import {
+  Box,
+  Heading,
+  Accordion,
+  AccordionItem,
+  AccordionButton,
+  AccordionPanel,
+  AccordionIcon,
+} from '@chakra-ui/react';
 import { useTranslation } from 'next-i18next';
-import { motion, useReducedMotion } from 'framer-motion';
+import { motion, useReducedMotion, type Variants } from 'framer-motion';
 
 const FAQ: React.FC = () => {
   const { t } = useTranslation(['home']);
@@ -10,7 +18,9 @@ const FAQ: React.FC = () => {
   const faqs = [
     {
       question: t('home:faq1Question', { defaultValue: 'How do I book a delivery?' }),
-      answer: t('home:faq1Answer', { defaultValue: 'Use our standard form or smart chat to book instantly.' }),
+      answer: t('home:faq1Answer', {
+        defaultValue: 'Use our standard form or smart chat to book instantly.',
+      }),
     },
     {
       question: t('home:faq2Question', { defaultValue: 'What areas do you cover?' }),
@@ -18,12 +28,18 @@ const FAQ: React.FC = () => {
     },
     {
       question: t('home:faq3Question', { defaultValue: 'How is the price calculated?' }),
-      answer: t('home:faq3Answer', { defaultValue: 'Prices are based on distance, item size, quantity, and number of workers.' }),
+      answer: t('home:faq3Answer', {
+        defaultValue:
+          'Prices are based on distance, item size, quantity, and number of workers.',
+      }),
     },
   ];
 
-  const variants = shouldReduceMotion
-    ? {}
+  const variants: Variants = shouldReduceMotion
+    ? {
+        hidden: { opacity: 1, y: 0 },
+        visible: { opacity: 1, y: 0 },
+      }
     : {
         hidden: { opacity: 0, y: 20 },
         visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },

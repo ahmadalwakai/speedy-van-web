@@ -9,9 +9,6 @@ import LoadingSpinner from '@/components/LoadingSpinner';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import logger from '@/services/logger';
 
-/**
- * Order History page
- */
 const OrderHistory: React.FC = () => {
   const { t } = useTranslation('common');
   const { user } = useAuthStore();

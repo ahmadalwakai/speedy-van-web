@@ -1,7 +1,14 @@
-import nodemailer from 'nodemailer';
+// utils/email.ts
+// @ts-ignore
 import PDFDocument from 'pdfkit';
+import nodemailer from 'nodemailer';
 import { Readable } from 'stream';
-import { Item } from '../components/BookOrder'; // افتراض أن Item معرف في BookOrder.tsx
+
+interface Item {
+  type: string;
+  size: string;
+  quantity: number;
+}
 
 interface OrderData {
   firstName: string;
@@ -17,7 +24,6 @@ interface OrderData {
 
 export const sendConfirmationEmail = async (orderData: OrderData): Promise<void> => {
   try {
-    // إعداد Nodemailer
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
@@ -26,7 +32,6 @@ export const sendConfirmationEmail = async (orderData: OrderData): Promise<void>
       },
     });
 
-    // إنشاء فاتورة PDF
     const doc = new PDFDocument();
     const buffers: Buffer[] = [];
     doc.on('data', buffers.push.bind(buffers));
@@ -49,9 +54,9 @@ export const sendConfirmationEmail = async (orderData: OrderData): Promise<void>
     doc.text(`Total Price: £${orderData.totalPrice.toFixed(2)}`, { align: 'right' });
     doc.end();
 
+    await new Promise<void>((resolve) => doc.on('end', resolve));
     const pdfBuffer = Buffer.concat(buffers);
 
-    // إرسال البريد الإلكتروني
     await transporter.sendMail({
       from: '"Speedy Van" <support@speedyvan.com>',
       to: orderData.email,

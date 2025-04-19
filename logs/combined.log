@@ -94,3 +94,7 @@
 [2025-04-18T22:27:51.683Z] info: ✅ Checkout session created successfully
 [2025-04-18T22:29:28.960Z] info: ✅ Creating Stripe checkout session
 [2025-04-18T22:29:29.512Z] info: ✅ Checkout session created successfully
+[2025-04-19T16:43:51.057Z] info: ✅ Creating Stripe checkout session
+[2025-04-19T16:43:52.350Z] info: ✅ Checkout session created successfully
+[2025-04-19T18:09:48.264Z] warn: Order history accessed without user
+[2025-04-19T18:09:48.310Z] warn: Order history accessed without user

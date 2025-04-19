@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Heading, Text, SimpleGrid, HStack, useColorModeValue, Icon } from '@chakra-ui/react';
 import { useTranslation } from 'next-i18next';
-import { motion, useReducedMotion } from 'framer-motion';
+import { motion, useReducedMotion, type Variants } from 'framer-motion';
 import { StarIcon } from '@/components/Icons';
 
 const Testimonials: React.FC = () => {
@@ -27,11 +27,21 @@ const Testimonials: React.FC = () => {
     },
   ];
 
-  const variants = shouldReduceMotion
-    ? {}
+  const variants: Variants = shouldReduceMotion
+    ? {
+        hidden: { opacity: 1, y: 0 },
+        visible: { opacity: 1, y: 0 },
+      }
     : {
         hidden: { opacity: 0, y: 20 },
-        visible: { opacity: 1, y: 0, transition: { duration: 0.6, staggerChildren: 0.2 } },
+        visible: {
+          opacity: 1,
+          y: 0,
+          transition: {
+            duration: 0.6,
+            staggerChildren: 0.2,
+          },
+        },
       };
 
   return (
@@ -62,7 +72,13 @@ const Testimonials: React.FC = () => {
               >
                 <HStack justify="center" mb={4}>
                   {[...Array(5)].map((_, i) => (
-                    <Icon as={StarIcon} key={i} color={i < testimonial.rating ? 'gold' : 'gray.300'} w={6} h={6} />
+                    <Icon
+                      as={StarIcon}
+                      key={i}
+                      color={i < testimonial.rating ? 'gold' : 'gray.300'}
+                      w={6}
+                      h={6}
+                    />
                   ))}
                 </HStack>
                 <Text color="text.secondary" mb={4}>{testimonial.text}</Text>

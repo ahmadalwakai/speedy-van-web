@@ -7,7 +7,7 @@ if (typeof window === 'undefined') {
     level: 'info',
     format: winston.format.combine(
       winston.format.timestamp(),
-      winston.format.printf(({ level, message, timestamp }) => {
+      winston.format.printf(({ level, message, timestamp }: { level: string; message: string; timestamp: string }) => {
         return `[${timestamp}] ${level}: ${message}`;
       })
     ),

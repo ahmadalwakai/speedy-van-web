@@ -10,7 +10,6 @@ const Header = dynamic(() => import('@/components/Header'), {
   loading: () => <Box h="80px" bg={useColorModeValue('white', 'gray.800')} />
 });
 const Hero = dynamic(() => import('@/components/sections/Hero'));
-const Services = dynamic(() => import('@/components/sections/Services'));
 const WhyUs = dynamic(() => import('@/components/sections/WhyUs'));
 const Testimonials = dynamic(() => import('@/components/sections/Testimonials'));
 const FAQ = dynamic(() => import('@/components/sections/FAQ'));
@@ -50,7 +49,6 @@ const Home: React.FC = () => {
       >
         <Header />
         <Hero />
-        <Services />
         <WhyUs />
         <Testimonials />
         <FAQ />

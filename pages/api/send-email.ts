@@ -1,5 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import nodemailer from 'nodemailer';
+// @ts-ignore
 import PDFDocument from 'pdfkit';
 import { Item } from '@/components/BookOrder';
 
@@ -23,7 +24,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   try {
     const orderData: OrderData = req.body;
 
-    // إعداد Nodemailer
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
@@ -32,7 +32,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       },
     });
 
-    // إنشاء فاتورة PDF
     const doc = new PDFDocument();
     const buffers: Buffer[] = [];
     doc.on('data', buffers.push.bind(buffers));
@@ -55,14 +54,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     doc.text(`Total Price: £${orderData.totalPrice.toFixed(2)}`, { align: 'right' });
     doc.end();
 
-    // انتظار إنشاء PDF
     await new Promise<void>((resolve) => {
       doc.on('end', resolve);
     });
 
     const pdfBuffer = Buffer.concat(buffers);
 
-    // إرسال البريد الإلكتروني
     await transporter.sendMail({
       from: '"Speedy Van" <support@speedyvan.com>',
       to: orderData.email,
@@ -77,10 +74,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       ],
     });
 
-    console.log('Confirmation email sent to:', orderData.email);
     return res.status(200).json({ message: 'Email sent successfully' });
   } catch (error) {
-    console.error('Error sending email:', error);
     return res.status(500).json({ message: 'Failed to send email', error: (error as Error).message });
   }
 }

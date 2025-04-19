@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Button, VStack, Text, HStack, Icon, useToast } from '@chakra-ui/react';
+import { Box, Button, VStack, Text, HStack, Icon, useToast, Textarea } from '@chakra-ui/react';
 import { useTranslation } from 'next-i18next';
 import { FiStar } from 'react-icons/fi';
 
@@ -34,7 +34,7 @@ const Rating: React.FC<{ orderId: string }> = ({ orderId }) => {
   };
 
   return (
-    <Box p={4} borderWidth={1} borderRadius="lg" boxShadow="md">
+    <Box padding={4} borderWidth={1} borderRadius="lg" boxShadow="md">
       <VStack spacing={4}>
         <Text fontSize="xl" fontWeight="bold">
           {t('rating:title', { defaultValue: 'Rate Your Experience' })}
@@ -53,7 +53,7 @@ const Rating: React.FC<{ orderId: string }> = ({ orderId }) => {
         </HStack>
         <Textarea
           value={comment}
-          onChange={(e) => setComment(e.target.value)}
+          onChange={(event) => setComment(event.target.value)}
           placeholder={t('rating:commentPlaceholder', { defaultValue: 'Share your feedback...' })}
         />
         <Button

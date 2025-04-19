@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Heading, Text, SimpleGrid, VStack, useColorModeValue, Icon } from '@chakra-ui/react';
 import { useTranslation } from 'next-i18next';
-import { motion, useReducedMotion } from 'framer-motion';
+import { motion, useReducedMotion, type Variants } from 'framer-motion';
 import { LockIcon, ZapIcon, DollarSignIcon } from '@/components/Icons';
 
 const WhyUs: React.FC = () => {
@@ -27,8 +27,11 @@ const WhyUs: React.FC = () => {
     },
   ];
 
-  const variants = shouldReduceMotion
-    ? {}
+  const variants: Variants = shouldReduceMotion
+    ? {
+        hidden: { opacity: 1, y: 0 },
+        visible: { opacity: 1, y: 0 },
+      }
     : {
         hidden: { opacity: 0, y: 20 },
         visible: { opacity: 1, y: 0, transition: { duration: 0.6, staggerChildren: 0.2 } },
