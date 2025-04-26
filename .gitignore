@@ -8,3 +8,4 @@ admin/
 config/dialogflow_key.json.json
 lib/config/serviceAccountKey.json.json
 functions/
+"config/dialogflow_key.json" 
