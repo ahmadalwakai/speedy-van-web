@@ -7,3 +7,4 @@ admin/
 # Ignore sensitive config files
 config/dialogflow_key.json.json
 lib/config/serviceAccountKey.json.json
+functions/
