@@ -1,13 +1,13 @@
 import React from 'react';
 import {
   Box,
+  Container,
   Heading,
   Text,
   SimpleGrid,
   HStack,
   useColorModeValue,
   Icon,
-  Container,
   Avatar
 } from '@chakra-ui/react';
 import { useTranslation } from 'next-i18next';
@@ -74,7 +74,7 @@ const Testimonials: React.FC = () => {
                 ))}
               </HStack>
               <Text color={textColor} mb={4} fontStyle="italic">
-                "{testimonial.text}"
+                “{testimonial.text}”
               </Text>
               <HStack justify="center" spacing={3}>
                 <Avatar name={testimonial.author} size="sm" />

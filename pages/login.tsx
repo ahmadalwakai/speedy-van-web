@@ -35,7 +35,7 @@ const Login = () => {
     if (user) {
       router.push(router.query.redirect?.toString() || '/');
     }
-  }, [user]);
+  }, [user, router]);
 
   useEffect(() => {
     if (error) {
@@ -48,7 +48,7 @@ const Login = () => {
       });
       clearError();
     }
-  }, [error]);
+  }, [error, toast, t, clearError]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -61,7 +61,7 @@ const Login = () => {
         duration: 3000,
         isClosable: true,
       });
-      router.push(router.query.redirect?.toString() || '/');  // ✅ إعادة التوجيه بعد تسجيل الدخول
+      router.push(router.query.redirect?.toString() || '/');
     } catch (error) {
       logger.error(`Login error: ${error}`);
     }
@@ -76,7 +76,7 @@ const Login = () => {
         duration: 3000,
         isClosable: true,
       });
-      router.push(router.query.redirect?.toString() || '/');  // ✅ إعادة التوجيه بعد تسجيل الدخول مع Google
+      router.push(router.query.redirect?.toString() || '/');
     } catch (error) {
       logger.error(`Google login error: ${error}`);
     }
@@ -129,7 +129,6 @@ const Login = () => {
                 <FormLabel mb="0" fontSize="sm">{t('auth:rememberMe')}</FormLabel>
               </FormControl>
 
-              {/* ✅ رابط نسيت كلمة المرور */}
               <Link href="/reset-password">
                 <Text color="blue.500" fontSize="sm" _hover={{ textDecoration: 'underline' }}>
                   {t('auth:forgotPassword')}

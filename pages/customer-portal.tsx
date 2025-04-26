@@ -45,7 +45,7 @@ const CustomerPortal: React.FC = () => {
     };
 
     fetchData();
-  }, []);
+  }, [auth.currentUser, router]);
 
   const handleSave = async () => {
     try {
@@ -73,13 +73,11 @@ const CustomerPortal: React.FC = () => {
 
   return (
     <Box maxW="4xl" mx="auto" p={4}>
-      {/* Navbar بسيط */}
       <Flex justify="space-between" align="center" mb={6}>
         <Heading size="md">Customer Portal</Heading>
         <Button colorScheme="red" onClick={handleLogout}>Logout</Button>
       </Flex>
 
-      {/* بيانات الحساب */}
       <Box mb={8} p={4} borderWidth={1} borderRadius="md">
         <HStack spacing={4}>
           <Avatar name={name} />
@@ -101,7 +99,6 @@ const CustomerPortal: React.FC = () => {
         </HStack>
       </Box>
 
-      {/* الطلبات */}
       <Box>
         <Heading size="sm" mb={4}>Your Orders</Heading>
         {orders.length === 0 ? (
@@ -119,7 +116,6 @@ const CustomerPortal: React.FC = () => {
 
       <Divider my={6} />
 
-      {/* Placeholder للتنبيهات */}
       <Box p={4} borderWidth={1} borderRadius="md">
         <Heading size="sm" mb={2}>Notifications</Heading>
         <Text>Coming soon...</Text>

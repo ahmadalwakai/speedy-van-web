@@ -4,12 +4,12 @@ import { useTranslation } from 'next-i18next';
 import Cookies from 'js-cookie';
 import { motion } from 'framer-motion';
 
-// تعريف مكون MotionBox لفصل خصائص الحركة عن خصائص Chakra
 const MotionBox = motion(Box);
 
 const CookieConsent: React.FC = () => {
   const { t } = useTranslation('common');
   const [visible, setVisible] = useState(false);
+  const bgColor = useColorModeValue('gray.800', 'gray.900');
 
   useEffect(() => {
     const consent = Cookies.get('cookieConsent');
@@ -39,7 +39,7 @@ const CookieConsent: React.FC = () => {
       bottom="0"
       left="0"
       right="0"
-      bg={useColorModeValue('gray.800', 'gray.900')}
+      bg={bgColor}
       color="white"
       p={4}
       zIndex="banner"

@@ -5,7 +5,6 @@ import NextLink from 'next/link';
 import { motion, useReducedMotion, type Variants } from 'framer-motion';
 import { FiTruck, FiClock } from 'react-icons/fi';
 
-// Create a MotionButton for animations
 const MotionButton = motion(Button);
 
 const CTA: React.FC = () => {

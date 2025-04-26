@@ -38,7 +38,6 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children, requiredRoles
     checkAuth();
   }, [isAuthenticated, isLoading, router, setUserFromToken, user, requiredRoles]);
 
-  // Show loader while checking authentication
   if (isLoading || !isAuthenticated) {
     return (
       <Box minH="100vh" display="flex" alignItems="center" justifyContent="center">
@@ -47,14 +46,13 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children, requiredRoles
     );
   }
 
-  // Handle unauthorized role access
   if (requiredRoles && user && 'role' in user && !requiredRoles.includes(user.role as string)) {
     return (
       <Box textAlign="center" py={10} px={6}>
         <Text fontSize="xl" fontWeight="bold" mb={4}>
           Unauthorized Access
         </Text>
-        <Text mb={4}>You don't have permission to view this page.</Text>
+        <Text mb={4}>You don&apos;t have permission to view this page.</Text>
         <Button colorScheme="blue" onClick={() => router.push('/')}>
           Go to Home
         </Button>

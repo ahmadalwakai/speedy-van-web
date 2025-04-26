@@ -4,7 +4,6 @@ import { useTranslation } from 'next-i18next';
 import NextLink from 'next/link';
 import { BookNowIcon } from '@/components/Icons';
 
-// Define props type
 interface HeroProps {
   currentLocale: string;
 }
@@ -64,7 +63,6 @@ const Hero: React.FC<HeroProps> = ({ currentLocale }) => {
         >
           {t('home:bookNow', { defaultValue: 'Book Now' })}
         </Button>
-        {/* Example of using currentLocale */}
         <Text fontSize="sm" color="gray.400">
           Current Locale: {currentLocale}
         </Text>

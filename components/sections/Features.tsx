@@ -60,7 +60,9 @@ const Features = () => {
   const cardShadow = useColorModeValue('md', 'dark-lg');
   const iconColor = useColorModeValue('blue.500', 'blue.300');
   const highlightBg = useColorModeValue('blue.50', 'blue.900');
-  
+  const iconBg = useColorModeValue('blue.50', 'blue.900');
+  const headingTextColor = useColorModeValue('gray.800', 'white');
+
   const gridColumns = useBreakpointValue({ base: 1, md: 2, lg: 3 });
   const sectionSpacing = useBreakpointValue({ base: 8, md: 16 });
 
@@ -216,7 +218,7 @@ const Features = () => {
                       h={12}
                       mb={6}
                       rounded="full"
-                      bg={useColorModeValue('blue.50', 'blue.900')}
+                      bg={iconBg}
                       color={iconColor}
                       _hover={{
                         transform: 'rotate(10deg) scale(1.1)',
@@ -229,7 +231,7 @@ const Features = () => {
                       as="h3"
                       size="md"
                       mb={3}
-                      color={useColorModeValue('gray.800', 'white')}
+                      color={headingTextColor}
                     >
                       {feature.title}
                     </Heading>

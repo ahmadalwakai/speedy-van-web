@@ -81,14 +81,13 @@ const FAQ: React.FC = () => {
   const bgColor = useColorModeValue('gray.50', 'gray.900');
   const hoverBg = useColorModeValue('gray.100', 'gray.700');
   const expandedBg = useColorModeValue('blue.100', 'blue.600');
+  const accordionBorderColor = useColorModeValue('gray.200', 'gray.700'); // تمت الإضافة
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // Implement search functionality
     console.log('Searching for:', e.target.value);
   };
 
   const openChat = () => {
-    // Implement chat functionality
     console.log('Opening chat...');
   };
 
@@ -133,7 +132,7 @@ const FAQ: React.FC = () => {
                   <AccordionItem 
                     key={index} 
                     border="1px solid" 
-                    borderColor={useColorModeValue('gray.200', 'gray.700')} 
+                    borderColor={accordionBorderColor} // تم التعديل
                     borderRadius="md" 
                     mb={4}
                   >
@@ -178,7 +177,7 @@ const FAQ: React.FC = () => {
                   <AccordionItem 
                     key={index} 
                     border="1px solid" 
-                    borderColor={useColorModeValue('gray.200', 'gray.700')} 
+                    borderColor={accordionBorderColor} // تم التعديل
                     borderRadius="md" 
                     mb={4}
                   >

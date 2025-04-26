@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import {
   Box, Button, Input, VStack, Text, HStack, Avatar, useColorModeValue,
   Heading, Icon, Progress, useToast
@@ -31,19 +31,8 @@ const SupportChat: React.FC = () => {
   const botMessageBg = useColorModeValue('blue.50', 'blue.900');
   const userMessageBg = useColorModeValue('green.100', 'green.900');
 
-  useEffect(() => {
-    if (isOpen && !sessionId) {
-      initChatSession();
-    }
-  }, [isOpen]);
-
-  useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages]);
-
-  const initChatSession = async () => {
+  const initChatSession = useCallback(async () => {
     try {
-      // Skip anonymous auth and create session directly
       const sessionRef = await addDoc(collection(db, 'chatSessions'), {
         startedAt: serverTimestamp(),
         status: 'active',
@@ -62,7 +51,17 @@ const SupportChat: React.FC = () => {
       });
       setIsOpen(false);
     }
-  };
+  }, [toast]);
+
+  useEffect(() => {
+    if (isOpen && !sessionId) {
+      initChatSession();
+    }
+  }, [isOpen, initChatSession, sessionId]);
+
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [messages]);
 
   const handleSend = async () => {
     if (!input.trim() || !sessionId) return;
