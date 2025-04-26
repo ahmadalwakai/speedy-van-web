@@ -4,7 +4,12 @@ import { useTranslation } from 'next-i18next';
 import NextLink from 'next/link';
 import { BookNowIcon } from '@/components/Icons';
 
-const Hero: React.FC = () => {
+// Define props type
+interface HeroProps {
+  currentLocale: string;
+}
+
+const Hero: React.FC<HeroProps> = ({ currentLocale }) => {
   const { t } = useTranslation(['home']);
 
   return (
@@ -32,8 +37,9 @@ const Hero: React.FC = () => {
           mb={4}
           fallbackSrc="https://picsum.photos/400/300?text=Hero"
           onError={(e) => {
+            const target = e.target as HTMLImageElement;
             console.error('Failed to load hero-image.png');
-            e.currentTarget.src = '/images/fallback-hero.png';
+            target.src = '/images/fallback-hero.png';
           }}
         />
         <Heading
@@ -47,18 +53,21 @@ const Hero: React.FC = () => {
         <Text fontSize={{ base: 'lg', md: 'xl' }} maxW="lg">
           {t('home:heroSubtitle', { defaultValue: 'Book your delivery today and experience seamless transport across the UK.' })}
         </Text>
-        <NextLink href="/book-order" passHref legacyBehavior>
-          <Button
-            as="a"
-            colorScheme="primary"
-            size="lg"
-            leftIcon={<BookNowIcon />}
-            _hover={{ transform: 'translateY(-2px)', boxShadow: 'lg' }}
-            transition="all 0.2s"
-          >
-            {t('home:bookNow', { defaultValue: 'Book Now' })}
-          </Button>
-        </NextLink>
+        <Button
+          as={NextLink}
+          href="/book-order"
+          colorScheme="primary"
+          size="lg"
+          leftIcon={<BookNowIcon />}
+          _hover={{ transform: 'translateY(-2px)', boxShadow: 'lg' }}
+          transition="all 0.2s"
+        >
+          {t('home:bookNow', { defaultValue: 'Book Now' })}
+        </Button>
+        {/* Example of using currentLocale */}
+        <Text fontSize="sm" color="gray.400">
+          Current Locale: {currentLocale}
+        </Text>
       </VStack>
     </Box>
   );

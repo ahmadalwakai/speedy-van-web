@@ -1,12 +1,12 @@
-import axios from 'axios';
+import axios from 'axios'; 
 import Cookies from 'js-cookie';
 import logger from './logger';
 
 /**
- * API client with token refresh logic
+ * API client for Next.js API Routes with token refresh logic
  */
 const api = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL,
+  baseURL: '/api',   // استخدام API Routes مباشرة
   headers: { 'Content-Type': 'application/json' },
 });
 
@@ -26,14 +26,14 @@ api.interceptors.response.use(
       const refreshToken = Cookies.get('refreshToken');
       if (!refreshToken) {
         logger.warn('No refresh token, redirecting to login');
-        window.location.href = '/login';
+        if (typeof window !== 'undefined') {
+          window.location.href = '/login';
+        }
         return Promise.reject(error);
       }
       try {
         logger.info('Attempting token refresh');
-        const { data } = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/refresh`, {
-          refreshToken,
-        });
+        const { data } = await axios.post('/api/auth/refresh', { refreshToken });
         Cookies.set('token', data.token, { secure: true, sameSite: 'strict' });
         error.config.headers.Authorization = `Bearer ${data.token}`;
         logger.info('Token refreshed successfully');
@@ -42,7 +42,9 @@ api.interceptors.response.use(
         logger.error(`Token refresh failed: ${refreshError}`);
         Cookies.remove('token');
         Cookies.remove('refreshToken');
-        window.location.href = '/login';
+        if (typeof window !== 'undefined') {
+          window.location.href = '/login';
+        }
         return Promise.reject(refreshError);
       }
     }

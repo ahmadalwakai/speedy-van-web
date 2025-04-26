@@ -3,5 +3,72 @@
   "heroSubtitle": "Book your delivery today and experience seamless transport across the UK.",
   "heroImageAlt": "Delivery Van",
   "bookNow": "Book Now",
-  "contactUs": "Contact Us on 07901846297"
+  "contactUs": "Contact Us on 07901846297",
+
+  "features": {
+    "subtitle": "Our Advantages",
+    "title": "Why Choose Speedy Van?",
+    "description": "Discover the benefits of using our service.",
+    "fastDelivery": { "title": "Fast Delivery", "description": "We ensure your items arrive on time, every time." },
+    "securePayment": { "title": "Secure Payment", "description": "All transactions are encrypted and safe." },
+    "competitivePricing": { "title": "Competitive Pricing", "description": "Get the best value for your money." },
+    "realTimeTracking": { "title": "Real-Time Tracking", "description": "Track your delivery live from start to finish." },
+    "support": { "title": "24/7 Support", "description": "We are here to help you anytime." },
+    "availability": { "title": "UK Wide Availability", "description": "We cover all areas across the UK." }
+  },
+
+  "coverageTitle": "Our Coverage",
+  "coverageDesc": "We deliver across the UK, from cities to rural areas.",
+  "citiesWeCover": "Cities We Cover",
+
+  "testimonials": {
+    "title": "What Our Customers Say",
+    "testimonial1": "Delivered my furniture in record time!",
+    "testimonial2": "The chat booking was so easy!",
+    "testimonial3": "Reliable and affordable!"
+  },
+
+  "pricing": {
+    "title": "Our Plans",
+    "description": "Choose the plan that suits you best.",
+    "basic": {
+      "title": "Basic",
+      "price": "£10/month",
+      "features": ["1 Delivery per week", "Basic Support", "Access to Dashboard"],
+      "buttonText": "Get Started"
+    },
+    "premium": {
+      "title": "Premium",
+      "price": "£25/month",
+      "features": ["5 Deliveries per week", "Priority Support", "Advanced Dashboard"],
+      "buttonText": "Upgrade Now"
+    },
+    "enterprise": {
+      "title": "Enterprise",
+      "price": "£50/month",
+      "features": ["Unlimited Deliveries", "24/7 Support", "Full Dashboard Access"],
+      "buttonText": "Contact Sales"
+    }
+  },
+
+  "faqTitle": "Frequently Asked Questions",
+  "faqSubtitle": "Here are some common questions about our services.",
+  "faq1Question": "How do I book a delivery?",
+  "faq1Answer": "Use our standard form or smart chat to book instantly.",
+  "faq2Question": "What areas do you cover?",
+  "faq2Answer": "We deliver across the entire UK.",
+  "faq3Question": "How is the price calculated?",
+  "faq3Answer": "Prices are based on distance, item size, quantity, and number of workers.",
+
+  "cta": {
+    "title": "Ready to move with Speedy Van?",
+    "description": "Book your delivery now and enjoy premium service!"
+  },
+
+  "cookieConsent": {
+    "message": "We use cookies to enhance your browsing experience, serve personalized ads or content, and analyze our traffic.",
+    "learnMore": "Learn more",
+    "accept": "Accept",
+    "decline": "Decline"
+  }
 }

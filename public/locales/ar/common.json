@@ -1,13 +1,24 @@
 {
-    "guest": "زائر",
-    "bookOrder": "حجز طلب",
-    "orderHistory": "سجل الطلبات",
-    "login": "تسجيل الدخول",
-    "register": "التسجيل",
-    "email": "البريد الإلكتروني",
-    "emailPlaceholder": "أدخل بريدك الإلكتروني",
-    "password": "كلمة المرور",
-    "passwordPlaceholder": "أدخل كلمة المرور",
-    "username": "اسم المستخدم",
-    "usernamePlaceholder": "أدخل اسم المستخدم"
-  }
+  "guest": "زائر",
+  "bookOrder": "حجز طلب",
+  "orderHistory": "سجل الطلبات",
+  "login": "تسجيل الدخول",
+  "register": "إنشاء حساب",
+  "email": "البريد الإلكتروني",
+  "emailPlaceholder": "أدخل بريدك الإلكتروني",
+  "password": "كلمة المرور",
+  "passwordPlaceholder": "أدخل كلمة المرور",
+  "username": "اسم المستخدم",
+  "usernamePlaceholder": "أدخل اسم المستخدم",
+
+  "bookNow": "احجز الآن",
+  "contactUs": "تواصل معنا",
+  "about": "من نحن",
+  "contact": "اتصل بنا",
+  "terms": "الشروط والأحكام",
+  "privacy": "سياسة الخصوصية",
+  "loading": "جاري التحميل...",
+  "submit": "إرسال",
+  "cancel": "إلغاء",
+  "search": "بحث"
+}

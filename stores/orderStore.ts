@@ -4,9 +4,6 @@ import { Order } from '@/types';
 import { sanitizeInput } from '@/utils/sanitize';
 import logger from '@/services/logger';
 
-/**
- * Order store using Zustand
- */
 interface OrderState {
   orders: Order[];
   loading: boolean;
@@ -18,7 +15,7 @@ interface OrderState {
     packageTypes: string[];
     paymentIntentId: string;
   }) => Promise<void>;
-  updateOrderStatus: (orderId: string, status: string) => Promise<void>;
+  updateOrderStatus: (orderId: string, status: Order['status']) => Promise<void>;
   cancelOrder: (orderId: string) => Promise<void>;
   fetchOrders: (username: string, page: number, limit: number) => Promise<void>;
 }
@@ -27,6 +24,7 @@ export const useOrderStore = create<OrderState>((set) => ({
   orders: [],
   loading: false,
   error: null,
+
   createOrder: async (orderData) => {
     set({ loading: true, error: null });
     try {
@@ -45,6 +43,7 @@ export const useOrderStore = create<OrderState>((set) => ({
       throw error;
     }
   },
+
   updateOrderStatus: async (orderId, status) => {
     set({ loading: true, error: null });
     try {
@@ -62,6 +61,7 @@ export const useOrderStore = create<OrderState>((set) => ({
       throw error;
     }
   },
+
   cancelOrder: async (orderId) => {
     set({ loading: true, error: null });
     try {
@@ -77,6 +77,7 @@ export const useOrderStore = create<OrderState>((set) => ({
       throw error;
     }
   },
+
   fetchOrders: async (username, page, limit) => {
     set({ loading: true, error: null });
     try {

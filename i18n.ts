@@ -6,4 +6,5 @@ module.exports = {
     locales: ['en', 'ar'],
   },
   localePath: path.resolve('./public/locales'),
+  react: { useSuspense: false },   // 🔥 أضف هذا السطر
 };

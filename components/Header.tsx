@@ -26,12 +26,32 @@ const Header: React.FC = () => {
   const router = useRouter();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [isLoading, setIsLoading] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
+
+  React.useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const handleLanguageSwitch = () => {
     setIsLoading(true);
     router.push(router.pathname, router.asPath, { locale: router.locale === 'ar' ? 'en' : 'ar' });
     setTimeout(() => setIsLoading(false), 1000);
   };
+
+  if (!isMounted) {
+    return (
+      <Box
+        as="header"
+        bg="header.bg"
+        boxShadow="sm"
+        position="sticky"
+        top={0}
+        zIndex={10}
+        py={4}
+        px={{ base: 4, md: 8 }}
+      />
+    );
+  }
 
   return (
     <Box
@@ -53,7 +73,10 @@ const Header: React.FC = () => {
             width={50}
             height={50}
             loading="lazy"
-            onError={() => console.error('Failed to load logo.png')}
+            onError={(e) => {
+              const target = e.target as HTMLImageElement;
+              target.src = '/fallback-logo.png';
+            }}
           />
           <Heading size={{ base: 'md', md: 'lg' }} color="header.text">
             Speedy Van
@@ -69,21 +92,34 @@ const Header: React.FC = () => {
           >
             {router.locale === 'ar' ? 'EN' : 'AR'}
           </Button>
-          <NextLink href="/book-order" passHref legacyBehavior>
-            <Button as="a" colorScheme="primary" size="lg" leftIcon={<BookNowIcon />}>
-              {t('common:bookNow', { defaultValue: 'Book Now' })}
-            </Button>
-          </NextLink>
-          <NextLink href="/login" passHref legacyBehavior>
-            <Button as="a" variant="outline" colorScheme="primary" size="lg" leftIcon={<LogInIcon />}>
-              {t('common:login', { defaultValue: 'Login' })}
-            </Button>
-          </NextLink>
-          <NextLink href="/register" passHref legacyBehavior>
-            <Button as="a" colorScheme="primary" size="lg" leftIcon={<UserPlusIcon />}>
-              {t('common:register', { defaultValue: 'Register' })}
-            </Button>
-          </NextLink>
+          <Button
+            as={NextLink}
+            href="/book-order"
+            colorScheme="primary"
+            size="lg"
+            leftIcon={<BookNowIcon />}
+          >
+            {t('common:bookNow', { defaultValue: 'Book Now' })}
+          </Button>
+          <Button
+            as={NextLink}
+            href="/login"
+            variant="outline"
+            colorScheme="primary"
+            size="lg"
+            leftIcon={<LogInIcon />}
+          >
+            {t('common:login', { defaultValue: 'Login' })}
+          </Button>
+          <Button
+            as={NextLink}
+            href="/register"
+            colorScheme="primary"
+            size="lg"
+            leftIcon={<UserPlusIcon />}
+          >
+            {t('common:register', { defaultValue: 'Register' })}
+          </Button>
           <Button
             as="a"
             href="tel:+447901846297"
@@ -124,43 +160,40 @@ const Header: React.FC = () => {
               >
                 {router.locale === 'ar' ? 'EN' : 'AR'}
               </Button>
-              <NextLink href="/book-order" passHref legacyBehavior>
-                <Button
-                  as="a"
-                  colorScheme="primary"
-                  w="full"
-                  justifyContent="flex-start"
-                  leftIcon={<BookNowIcon />}
-                  onClick={onClose}
-                >
-                  {t('common:bookNow')}
-                </Button>
-              </NextLink>
-              <NextLink href="/login" passHref legacyBehavior>
-                <Button
-                  as="a"
-                  variant="outline"
-                  colorScheme="primary"
-                  w="full"
-                  justifyContent="flex-start"
-                  leftIcon={<LogInIcon />}
-                  onClick={onClose}
-                >
-                  {t('common:login')}
-                </Button>
-              </NextLink>
-              <NextLink href="/register" passHref legacyBehavior>
-                <Button
-                  as="a"
-                  colorScheme="primary"
-                  w="full"
-                  justifyContent="flex-start"
-                  leftIcon={<UserPlusIcon />}
-                  onClick={onClose}
-                >
-                  {t('common:register')}
-                </Button>
-              </NextLink>
+              <Button
+                as={NextLink}
+                href="/book-order"
+                colorScheme="primary"
+                w="full"
+                justifyContent="flex-start"
+                leftIcon={<BookNowIcon />}
+                onClick={onClose}
+              >
+                {t('common:bookNow')}
+              </Button>
+              <Button
+                as={NextLink}
+                href="/login"
+                variant="outline"
+                colorScheme="primary"
+                w="full"
+                justifyContent="flex-start"
+                leftIcon={<LogInIcon />}
+                onClick={onClose}
+              >
+                {t('common:login')}
+              </Button>
+              <Button
+                as={NextLink}
+                href="/register"
+                colorScheme="primary"
+                w="full"
+                justifyContent="flex-start"
+                leftIcon={<UserPlusIcon />}
+                onClick={onClose}
+              >
+                {t('common:register')}
+              </Button>
               <Button
                 as="a"
                 href="tel:+447901846297"

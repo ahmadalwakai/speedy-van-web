@@ -9,5 +9,22 @@
   "password": "Password",
   "passwordPlaceholder": "Enter your password",
   "username": "Username",
-  "usernamePlaceholder": "Enter your username"
+  "usernamePlaceholder": "Enter your username",
+
+  "bookNow": "Book Now",
+  "contactUs": "Contact Us",
+  "about": "About Us",
+  "contact": "Contact",
+  "terms": "Terms & Conditions",
+  "privacy": "Privacy Policy",
+  "loading": "Loading...",
+  "submit": "Submit",
+  "cancel": "Cancel",
+  "search": "Search"
+  "allRightsReserved": "All rights reserved.",
+  "about": "About Us",
+  "contact": "Contact Us",
+  "terms": "Terms",
+  "bookNow": "Book Now",
+  "contactUs": "Contact Us"
 }

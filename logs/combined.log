@@ -98,3 +98,12 @@
 [2025-04-19T16:43:52.350Z] info: ✅ Checkout session created successfully
 [2025-04-19T18:09:48.264Z] warn: Order history accessed without user
 [2025-04-19T18:09:48.310Z] warn: Order history accessed without user
+[2025-04-24T05:41:17.326Z] error: Google login failed: Error: The file at C:\Ahmadaa\project_root\dialogflow_key.json does not exist, or it is not a file. ENOENT: no such file or directory, lstat 'C:\Ahmadaa'
+[2025-04-24T05:48:50.887Z] error: Google login failed: Error: The file at C:\Ahmadaa\project_root\dialogflow_key.json does not exist, or it is not a file. ENOENT: no such file or directory, lstat 'C:\Ahmadaa'
+[2025-04-24T05:58:58.647Z] error: Google login failed: Error: The file at C:\Ahmadaa\project_root\dialogflow_key.json does not exist, or it is not a file. ENOENT: no such file or directory, lstat 'C:\Ahmadaa'
+[2025-04-24T06:17:13.293Z] error: Google login failed: Error: secretOrPrivateKey must have a value
+[2025-04-24T06:21:45.346Z] info: Google login successful for ahmadalwakai76@gmail.com
+[2025-04-24T06:30:25.059Z] info: Google login successful for ahmadalwakai76@gmail.com
+[2025-04-24T06:55:08.167Z] info: Google login successful for ahmadalwakai76@gmail.com
+[2025-04-24T14:46:48.378Z] info: ✅ Creating Stripe checkout session
+[2025-04-24T14:46:49.580Z] info: ✅ Checkout session created successfully
