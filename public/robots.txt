@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# Disallow sensitive paths (if any admin panels exposed publicly)
+Disallow: /admin
+Disallow: /api
+
+# Sitemap location
+Sitemap: https://speedy-van.co.uk/sitemap.xml
