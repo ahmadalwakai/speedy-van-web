@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Box,
   Flex,
   HStack,
-  Image,
   Heading,
   Button,
   Drawer,
@@ -15,6 +14,7 @@ import {
   useDisclosure,
   IconButton,
 } from '@chakra-ui/react';
+import Image from 'next/image';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import NextLink from 'next/link';
@@ -27,9 +27,15 @@ const Header: React.FC = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [isLoading, setIsLoading] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
-  React.useEffect(() => {
+  useEffect(() => {
     setIsMounted(true);
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const handleLanguageSwitch = () => {
@@ -42,12 +48,13 @@ const Header: React.FC = () => {
     return (
       <Box
         as="header"
-        bg="header.bg"
-        boxShadow="sm"
-        position="sticky"
+        bg="rgba(0, 0, 0, 0.2)"
+        backdropFilter="blur(6px)"
+        position="fixed"
         top={0}
-        zIndex={10}
-        py={4}
+        width="100%"
+        zIndex={20}
+        py={2}
         px={{ base: 4, md: 8 }}
       />
     );
@@ -56,48 +63,59 @@ const Header: React.FC = () => {
   return (
     <Box
       as="header"
-      bg="header.bg"
-      boxShadow="sm"
-      position="sticky"
+      bg={scrolled ? 'rgba(0, 0, 0, 0.7)' : 'rgba(0, 0, 0, 0.2)'}
+      backdropFilter="blur(6px)"
+      position="fixed"
       top={0}
-      zIndex={10}
-      py={4}
+      width="100%"
+      zIndex={20}
+      py={2}
       px={{ base: 4, md: 8 }}
+      transition="background 0.3s ease"
       aria-label={t('common:mainNavigation', { defaultValue: 'Main navigation' })}
     >
-      <Flex maxW="7xl" mx="auto" align="center" justify="space-between">
+      <Flex as="nav" maxW="7xl" mx="auto" align="center" justify="space-between" aria-label="Primary Navigation">
         <HStack spacing={4}>
-          <Image
-            src="/logo.png"
-            alt={t('common:logoAlt', { defaultValue: 'Speedy Van Logo' })}
-            width={50}
-            height={50}
-            loading="lazy"
-            onError={(e) => {
-              const target = e.target as HTMLImageElement;
-              target.src = '/fallback-logo.png';
-            }}
-          />
-          <Heading size={{ base: 'md', md: 'lg' }} color="header.text">
+          <NextLink href="/" passHref>
+            <Image
+              src="/logo.png"
+              alt={t('common:logoAlt', {
+                defaultValue: 'Speedy Van | Fast Van Delivery Services in the UK',
+              })}
+              width={router.pathname === '/' ? 55 : 45}
+              height={router.pathname === '/' ? 55 : 45}
+              priority
+              onError={(e) => {
+                e.currentTarget.src = '/fallback-logo.png';
+              }}
+              style={{ cursor: 'pointer' }}
+            />
+          </NextLink>
+          <Heading size={{ base: 'sm', md: 'md' }} color="white">
             Speedy Van
           </Heading>
         </HStack>
         <HStack spacing={{ base: 2, md: 4 }} display={{ base: 'none', md: 'flex' }}>
           <Button
             variant="ghost"
+            color="white"
+            _hover={{ bg: 'whiteAlpha.200' }}
             leftIcon={<GlobeIcon />}
             onClick={handleLanguageSwitch}
             isLoading={isLoading}
-            aria-label={t('common:switchLanguage', { defaultValue: 'Switch Language' })}
+            aria-label={t('common:switchLanguage', { defaultValue: 'Switch to Arabic or English' })}
           >
             {router.locale === 'ar' ? 'EN' : 'AR'}
           </Button>
           <Button
             as={NextLink}
             href="/book-order"
-            colorScheme="primary"
-            size="lg"
+            variant="ghost"
+            color="white"
+            _hover={{ bg: 'whiteAlpha.200' }}
             leftIcon={<BookNowIcon />}
+            role="link"
+            aria-label={t('common:bookNowAria', { defaultValue: 'Book a van delivery with Speedy Van' })}
           >
             {t('common:bookNow', { defaultValue: 'Book Now' })}
           </Button>
@@ -105,28 +123,47 @@ const Header: React.FC = () => {
             as={NextLink}
             href="/login"
             variant="outline"
-            colorScheme="primary"
-            size="lg"
+            borderColor="whiteAlpha.700"
+            color="white"
+            _hover={{ bg: 'whiteAlpha.200', borderColor: 'white' }}
             leftIcon={<LogInIcon />}
+            role="link"
+            aria-label={t('common:loginAria', { defaultValue: 'Log in to your Speedy Van account' })}
           >
             {t('common:login', { defaultValue: 'Login' })}
           </Button>
           <Button
             as={NextLink}
             href="/register"
-            colorScheme="primary"
-            size="lg"
+            variant="ghost"
+            color="white"
+            _hover={{ bg: 'whiteAlpha.200' }}
             leftIcon={<UserPlusIcon />}
+            role="link"
+            aria-label={t('common:registerAria', { defaultValue: 'Register for a Speedy Van account' })}
           >
             {t('common:register', { defaultValue: 'Register' })}
           </Button>
           <Button
+            as={NextLink}
+            href="/become-driver"
+            variant="ghost"
+            color="white"
+            _hover={{ bg: 'whiteAlpha.200' }}
+            role="link"
+            aria-label={t('common:becomeDriverAria', { defaultValue: 'Apply to become a van driver with Speedy Van' })}
+          >
+            {t('common:becomeDriver', { defaultValue: 'Become a Driver' })}
+          </Button>
+          <Button
             as="a"
             href="tel:+447901846297"
-            colorScheme="secondary"
-            size="lg"
+            variant="ghost"
+            color="white"
+            _hover={{ bg: 'whiteAlpha.200' }}
             leftIcon={<PhoneIcon />}
-            aria-label={t('common:contactUs', { defaultValue: 'Contact Us' })}
+            role="link"
+            aria-label={t('common:contactUsAria', { defaultValue: 'Call Speedy Van customer support' })}
           >
             {t('common:contactUs', { defaultValue: 'Contact Us' })}
           </Button>
@@ -135,19 +172,22 @@ const Header: React.FC = () => {
           display={{ base: 'flex', md: 'none' }}
           icon={<HamburgerIcon />}
           onClick={onOpen}
-          aria-label={t('common:openMenu', { defaultValue: 'Open menu' })}
-          variant="outline"
-          colorScheme="primary"
+          aria-label={t('common:openMenu', { defaultValue: 'Open navigation menu' })}
+          variant="ghost"
+          color="white"
+          _hover={{ bg: 'whiteAlpha.200' }}
         />
       </Flex>
       <Drawer isOpen={isOpen} placement="right" onClose={onClose}>
         <DrawerOverlay />
-        <DrawerContent>
-          <DrawerCloseButton aria-label={t('common:closeMenu', { defaultValue: 'Close menu' })} />
+        <DrawerContent bg="gray.800" color="white">
+          <DrawerCloseButton aria-label={t('common:closeMenu', { defaultValue: 'Close navigation menu' })} />
           <DrawerBody>
             <VStack spacing={4} mt={10}>
               <Button
                 variant="ghost"
+                color="white"
+                _hover={{ bg: 'whiteAlpha.200' }}
                 leftIcon={<GlobeIcon />}
                 onClick={() => {
                   handleLanguageSwitch();
@@ -156,55 +196,84 @@ const Header: React.FC = () => {
                 isLoading={isLoading}
                 w="full"
                 justifyContent="flex-start"
-                aria-label={t('common:switchLanguage')}
+                aria-label={t('common:switchLanguage', { defaultValue: 'Switch to Arabic or English' })}
               >
                 {router.locale === 'ar' ? 'EN' : 'AR'}
               </Button>
               <Button
                 as={NextLink}
                 href="/book-order"
-                colorScheme="primary"
+                variant="ghost"
+                color="white"
+                _hover={{ bg: 'whiteAlpha.200' }}
+                leftIcon={<BookNowIcon />}
+                role="link"
+                aria-label={t('common:bookNowAria', { defaultValue: 'Book a van delivery with Speedy Van' })}
                 w="full"
                 justifyContent="flex-start"
-                leftIcon={<BookNowIcon />}
                 onClick={onClose}
               >
-                {t('common:bookNow')}
+                {t('common:bookNow', { defaultValue: 'Book Now' })}
               </Button>
               <Button
                 as={NextLink}
                 href="/login"
                 variant="outline"
-                colorScheme="primary"
+                borderColor="whiteAlpha.700"
+                color="white"
+                _hover={{ bg: 'whiteAlpha.200', borderColor: 'white' }}
+                leftIcon={<LogInIcon />}
+                role="link"
+                aria-label={t('common:loginAria', { defaultValue: 'Log in to your Speedy Van account' })}
                 w="full"
                 justifyContent="flex-start"
-                leftIcon={<LogInIcon />}
                 onClick={onClose}
               >
-                {t('common:login')}
+                {t('common:login', { defaultValue: 'Login' })}
               </Button>
               <Button
                 as={NextLink}
                 href="/register"
-                colorScheme="primary"
+                variant="ghost"
+                color="white"
+                _hover={{ bg: 'whiteAlpha.200' }}
+                leftIcon={<UserPlusIcon />}
+                role="link"
+                aria-label={t('common:registerAria', { defaultValue: 'Register for a Speedy Van account' })}
                 w="full"
                 justifyContent="flex-start"
-                leftIcon={<UserPlusIcon />}
                 onClick={onClose}
               >
-                {t('common:register')}
+                {t('common:register', { defaultValue: 'Register' })}
+              </Button>
+              <Button
+                as={NextLink}
+                href="/become-driver"
+                variant="ghost"
+                color="white"
+                _hover={{ bg: 'whiteAlpha.200' }}
+                role="link"
+                aria-label={t('common:becomeDriverAria', { defaultValue: 'Apply to become a van driver with Speedy Van' })}
+                w="full"
+                justifyContent="flex-start"
+                onClick={onClose}
+              >
+                {t('common:becomeDriver', { defaultValue: 'Become a Driver' })}
               </Button>
               <Button
                 as="a"
                 href="tel:+447901846297"
-                colorScheme="secondary"
+                variant="ghost"
+                color="white"
+                _hover={{ bg: 'whiteAlpha.200' }}
+                leftIcon={<PhoneIcon />}
+                role="link"
+                aria-label={t('common:contactUsAria', { defaultValue: 'Call Speedy Van customer support' })}
                 w="full"
                 justifyContent="flex-start"
-                leftIcon={<PhoneIcon />}
                 onClick={onClose}
-                aria-label={t('common:contactUs')}
               >
-                {t('common:contactUs')}
+                {t('common:contactUs', { defaultValue: 'Contact Us' })}
               </Button>
             </VStack>
           </DrawerBody>

@@ -1,36 +1,58 @@
 {
-  "heroTitle": "Fast & Reliable Delivery with Speedy Van",
-  "heroSubtitle": "Book your delivery today and experience seamless transport across the UK.",
-  "heroImageAlt": "Delivery Van",
+  "heroTitle": "Fast & Reliable Van Delivery Across the UK",
+  "heroSubtitle": "Book today with Speedy Van — affordable, secure, and fast transport solutions.",
+  "heroImageAlt": "Speedy Van Delivery Service",
   "bookNow": "Book Now",
   "contactUs": "Contact Us on 07901846297",
-
+  "videoUnsupported": "Sorry, your browser does not support embedded videos.",
+  "title": "Speedy Van | Fast & Affordable Van Delivery Services Across the UK",
+  "description": "Book reliable van delivery services with Speedy Van. Covering all UK cities with fast, secure, and affordable transport solutions. Get your free quote today!",
+  "keywords": "Van Delivery UK, Fast Transport Service, Affordable Moving UK, Book Van Service, Reliable Delivery UK",
+  "ogTitle": "Speedy Van | Fast Van Delivery Across the UK",
+  "ogDescription": "Affordable and reliable van transport services. Book your delivery today!",
+  "customerPortal": "Go to Customer Portal",
+  "becomeDriver": "Become a Driver",
   "features": {
     "subtitle": "Our Advantages",
     "title": "Why Choose Speedy Van?",
     "description": "Discover the benefits of using our service.",
-    "fastDelivery": { "title": "Fast Delivery", "description": "We ensure your items arrive on time, every time." },
-    "securePayment": { "title": "Secure Payment", "description": "All transactions are encrypted and safe." },
-    "competitivePricing": { "title": "Competitive Pricing", "description": "Get the best value for your money." },
-    "realTimeTracking": { "title": "Real-Time Tracking", "description": "Track your delivery live from start to finish." },
-    "support": { "title": "24/7 Support", "description": "We are here to help you anytime." },
-    "availability": { "title": "UK Wide Availability", "description": "We cover all areas across the UK." }
+    "fastDelivery": {
+      "title": "Fast Delivery",
+      "description": "We ensure your items arrive on time, every time."
+    },
+    "securePayment": {
+      "title": "Secure Payment",
+      "description": "All transactions are encrypted and safe."
+    },
+    "competitivePricing": {
+      "title": "Competitive Pricing",
+      "description": "Get the best value for your money."
+    },
+    "realTimeTracking": {
+      "title": "Real-Time Tracking",
+      "description": "Track your delivery live from start to finish."
+    },
+    "support": {
+      "title": "24/7 Support",
+      "description": "We are here to help you anytime."
+    },
+    "availability": {
+      "title": "UK Wide Availability",
+      "description": "We cover all areas across the UK. Learn more about our <a href='/coverage'>UK coverage areas</a>."
+    }
   },
-
   "coverageTitle": "Our Coverage",
-  "coverageDesc": "We deliver across the UK, from cities to rural areas.",
+  "coverageDesc": "We deliver across the UK, from cities to rural areas. Learn more about our <a href='/coverage'>UK coverage areas</a>.",
   "citiesWeCover": "Cities We Cover",
-
   "testimonials": {
     "title": "What Our Customers Say",
     "testimonial1": "Delivered my furniture in record time!",
     "testimonial2": "The chat booking was so easy!",
     "testimonial3": "Reliable and affordable!"
   },
-
   "pricing": {
     "title": "Our Plans",
-    "description": "Choose the plan that suits you best.",
+    "description": "Choose the plan that suits you best. Check our <a href='/pricing'>affordable pricing plans</a>.",
     "basic": {
       "title": "Basic",
       "price": "£10/month",
@@ -50,21 +72,20 @@
       "buttonText": "Contact Sales"
     }
   },
-
   "faqTitle": "Frequently Asked Questions",
   "faqSubtitle": "Here are some common questions about our services.",
   "faq1Question": "How do I book a delivery?",
-  "faq1Answer": "Use our standard form or smart chat to book instantly.",
+  "faq1Answer": "Use our standard form or smart chat to book instantly. <a href='/book-order'>Book now</a>.",
   "faq2Question": "What areas do you cover?",
-  "faq2Answer": "We deliver across the entire UK.",
+  "faq2Answer": "We deliver across the entire UK. Explore our <a href='/coverage'>coverage areas</a>.",
   "faq3Question": "How is the price calculated?",
-  "faq3Answer": "Prices are based on distance, item size, quantity, and number of workers.",
-
+  "faq3Answer": "Prices are based on distance, item size, quantity, and number of workers. Get a <a href='/get-quote'>free quote</a>.",
   "cta": {
     "title": "Ready to move with Speedy Van?",
-    "description": "Book your delivery now and enjoy premium service!"
+    "description": "Book your delivery now and enjoy premium service! Need a quick estimate? <a href='/get-quote'>Get a free quote now</a>.",
+    "getQuote": "Get a Free Quote",
+    "limitedSlots": "Limited slots available today – Book now!"
   },
-
   "cookieConsent": {
     "message": "We use cookies to enhance your browsing experience, serve personalized ads or content, and analyze our traffic.",
     "learnMore": "Learn more",
