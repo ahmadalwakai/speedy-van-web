@@ -8,6 +8,7 @@ import {
   Container,
   HStack,
   Icon,
+  chakra,
 } from '@chakra-ui/react';
 import { useTranslation } from 'next-i18next';
 import NextLink from 'next/link';
@@ -21,7 +22,6 @@ const CTA: React.FC = () => {
   const { t } = useTranslation(['common', 'home']);
   const shouldReduceMotion = useReducedMotion();
 
-  // Define variants for animation with delay
   const variants: Variants = shouldReduceMotion
     ? { hidden: { opacity: 1, y: 0 }, visible: { opacity: 1, y: 0 } }
     : {
@@ -51,7 +51,6 @@ const CTA: React.FC = () => {
       borderRadius="lg"
       boxShadow="lg"
     >
-      {/* Background pattern */}
       <Box
         position="absolute"
         top={0}
@@ -88,9 +87,13 @@ const CTA: React.FC = () => {
           mx="auto"
           opacity={0.95}
         >
-          {t('home:cta.description', {
-            defaultValue: 'Book now and enjoy seamless delivery at competitive rates!',
-          })}
+          <chakra.span
+            dangerouslySetInnerHTML={{
+              __html: t('home:cta.description', {
+                defaultValue: 'Book your delivery now and enjoy premium service! Need a quick estimate? <a href="/get-quote">Get a free quote now</a>.',
+              }),
+            }}
+          />
         </Text>
 
         <HStack spacing={5} justify="center" flexWrap="wrap">

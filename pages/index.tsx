@@ -18,6 +18,9 @@ const Header = dynamic(() => import('@/components/Header'), {
 const Hero = dynamic(() => import('@/components/sections/Hero'), {
   loading: () => <Box height="500px" aria-hidden="true" />,
 });
+const HeroDescription = dynamic(() => import('@/components/sections/HeroDescription'), {
+  loading: () => <Box height="300px" aria-hidden="true" />,
+});
 const WhyUs = dynamic(() => import('@/components/sections/WhyUs'), {
   loading: () => <Box height="400px" aria-hidden="true" />,
 });
@@ -50,10 +53,6 @@ const SupportChat = dynamic(() => import('@/components/SupportChat'), {
   ssr: false,
   loading: () => null,
 });
-const MapboxMap = dynamic(() => import('@/components/MapboxMap'), {
-  ssr: false,
-  loading: () => <Box height="400px" aria-hidden="true" />,
-});
 
 interface HomeProps {
   locale: string;
@@ -78,14 +77,17 @@ const Home: React.FC<HomeProps> = ({ locale }) => {
     '@context': 'https://schema.org',
     '@type': 'Organization',
     name: 'Speedy Van',
-    url: 'https://speedyvan.com',
-    logo: 'https://speedyvan.com/logo.png',
-    description:
-      'Speedy Van offers fast, reliable, and affordable van delivery services across the UK.',
+    url: 'https://speedy-van.co.uk',
+    logo: 'https://speedy-van.co.uk/logo.png',
+    description: t('home:description', {
+      defaultValue:
+        'Speedy Van offers fast, reliable, and affordable van delivery services across the UK.',
+    }),
     contactPoint: {
       '@type': 'ContactPoint',
       telephone: '+447901846297',
       contactType: 'Customer Service',
+      email: 'info@speedy-van.co.uk',
     },
     sameAs: [
       'https://www.facebook.com/speedyvan',
@@ -97,11 +99,11 @@ const Home: React.FC<HomeProps> = ({ locale }) => {
   const webSiteSchema = {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
-    url: 'https://speedyvan.com',
+    url: 'https://speedy-van.co.uk',
     name: 'Speedy Van',
     potentialAction: {
       '@type': 'SearchAction',
-      target: 'https://speedyvan.com/search?q={search_term_string}',
+      target: 'https://speedy-van.co.uk/search?q={search_term_string}',
       'query-input': 'required name=search_term_string',
     },
   };
@@ -151,6 +153,7 @@ const Home: React.FC<HomeProps> = ({ locale }) => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#3182CE" />
         <link rel="icon" href="/favicon.ico" />
+        <meta name="contact" content="info@speedy-van.co.uk" />
         {/* Open Graph Tags */}
         <meta
           property="og:title"
@@ -162,8 +165,8 @@ const Home: React.FC<HomeProps> = ({ locale }) => {
             defaultValue: 'Affordable and reliable van transport services. Book your delivery today!',
           })}
         />
-        <meta property="og:image" content="https://speedyvan.com/og-image.jpg" />
-        <meta property="og:url" content="https://speedyvan.com" />
+        <meta property="og:image" content="https://speedy-van.co.uk/og-image.jpg" />
+        <meta property="og:url" content="https://speedy-van.co.uk" />
         <meta property="og:type" content="website" />
         {/* Schema Markup */}
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
@@ -187,7 +190,7 @@ const Home: React.FC<HomeProps> = ({ locale }) => {
 
         <Box as="main" aria-label="Main content">
           <Hero />
-          <WhyUs />
+          <HeroDescription />
           <Features />
           <Coverage />
           <Testimonials />

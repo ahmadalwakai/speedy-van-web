@@ -35,17 +35,17 @@ const FAQ: React.FC = () => {
   const generalFaqs = [
     {
       question: t('faq1Question', { defaultValue: 'How do I book a delivery?' }),
-      answer: t('faq1Answer', { defaultValue: 'Use our standard form or smart chat to book instantly.' }),
+      answer: t('faq1Answer', { defaultValue: 'Use our standard form or smart chat to book instantly. <a href="/book-order">Book now</a>.' }),
       icon: <FiHelpCircle />
     },
     {
       question: t('faq2Question', { defaultValue: 'What areas do you cover?' }),
-      answer: t('faq2Answer', { defaultValue: 'We deliver across the entire UK.' }),
+      answer: t('faq2Answer', { defaultValue: 'We deliver across the entire UK. <a href="/coverage">Explore our coverage areas</a>.' }),
       icon: <FiMapPin />
     },
     {
       question: t('faq3Question', { defaultValue: 'How is the price calculated?' }),
-      answer: t('faq3Answer', { defaultValue: 'Prices are based on distance, item size, quantity, and number of workers.' }),
+      answer: t('faq3Answer', { defaultValue: 'Prices are based on distance, item size, quantity, and number of workers. <a href="/get-quote">Get a free quote</a>.' }),
       icon: <FiDollarSign />
     },
   ];
@@ -81,7 +81,7 @@ const FAQ: React.FC = () => {
   const bgColor = useColorModeValue('gray.50', 'gray.900');
   const hoverBg = useColorModeValue('gray.100', 'gray.700');
   const expandedBg = useColorModeValue('blue.100', 'blue.600');
-  const accordionBorderColor = useColorModeValue('gray.200', 'gray.700'); // تمت الإضافة
+  const accordionBorderColor = useColorModeValue('gray.200', 'gray.700');
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     console.log('Searching for:', e.target.value);
@@ -132,7 +132,7 @@ const FAQ: React.FC = () => {
                   <AccordionItem 
                     key={index} 
                     border="1px solid" 
-                    borderColor={accordionBorderColor} // تم التعديل
+                    borderColor={accordionBorderColor}
                     borderRadius="md" 
                     mb={4}
                   >
@@ -155,7 +155,7 @@ const FAQ: React.FC = () => {
                       animate="visible"
                       transition={{ duration: 0.3 }}
                     >
-                      {faq.answer}
+                      <Text dangerouslySetInnerHTML={{ __html: faq.answer }} />
                       {index === 0 && (
                         <Box mt={2}>
                           <NextLink href="/pricing-policy" passHref>
@@ -177,7 +177,7 @@ const FAQ: React.FC = () => {
                   <AccordionItem 
                     key={index} 
                     border="1px solid" 
-                    borderColor={accordionBorderColor} // تم التعديل
+                    borderColor={accordionBorderColor}
                     borderRadius="md" 
                     mb={4}
                   >
@@ -211,7 +211,7 @@ const FAQ: React.FC = () => {
 
         <Box textAlign="center" mt={10}>
           <Text color={textColor} mb={4}>
-            {t('faqMore', { defaultValue: "Didn't find what you're looking for?" })}
+            {t('faqMore', { defaultValue: "Didn't find what you're looking for? Email us at support@speedy-van.co.uk." })}
           </Text>
           <Button 
             colorScheme="blue" 

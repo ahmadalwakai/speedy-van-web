@@ -4,8 +4,9 @@ import logger from '@/services/logger';
 
 export default function Document() {
   return (
-    <Html>
+    <Html lang="en">
       <Head>
+        <meta name="contact" content="info@speedy-van.co.uk" />
         <Script
           id="mapbox-gl-js"
           strategy="beforeInteractive"

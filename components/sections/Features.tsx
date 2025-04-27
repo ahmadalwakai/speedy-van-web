@@ -1,29 +1,8 @@
 import React from 'react';
-import { 
-  Box, 
-  Container, 
-  Grid, 
-  GridItem, 
-  Heading, 
-  Text, 
-  Icon, 
-  useColorModeValue, 
-  chakra, 
-  Flex, 
-  useBreakpointValue,
-  Badge,
-  Link as ChakraLink
-} from '@chakra-ui/react';
+import { Box, Container, Grid, GridItem, Heading, Text, Icon, useColorModeValue, Flex, useBreakpointValue, Badge, chakra } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'next-i18next';
-import { 
-  FaShippingFast, 
-  FaShieldAlt, 
-  FaMoneyBillWave, 
-  FaMapMarkedAlt, 
-  FaHeadset, 
-  FaClock 
-} from 'react-icons/fa';
+import { FaShippingFast, FaShieldAlt, FaMoneyBillWave, FaMapMarkedAlt, FaHeadset, FaClock } from 'react-icons/fa';
 import NextLink from 'next/link';
 
 const MotionBox = motion(Box);
@@ -52,6 +31,18 @@ const cardVariants = {
   }
 };
 
+interface Feature {
+  icon: React.ElementType;
+  title: string;
+  description?: string;
+  descriptionKey?: string;
+  highlight?: boolean;
+  stats?: string;
+  badge?: string;
+  new?: boolean;
+  link?: string;
+}
+
 const Features = () => {
   const { t } = useTranslation('home');
   const headingColor = useColorModeValue('blue.600', 'blue.300');
@@ -66,7 +57,7 @@ const Features = () => {
   const gridColumns = useBreakpointValue({ base: 1, md: 2, lg: 3 });
   const sectionSpacing = useBreakpointValue({ base: 8, md: 16 });
 
-  const features = [
+  const features: Feature[] = [
     {
       icon: FaShippingFast,
       title: t('features.fastDelivery.title'),
@@ -100,8 +91,8 @@ const Features = () => {
     {
       icon: FaClock,
       title: t('features.availability.title'),
-      description: t('features.availability.description'),
-      new: true
+      descriptionKey: 'features.availability.description',
+      link: '/coverage'
     }
   ];
 
@@ -163,11 +154,100 @@ const Features = () => {
           {features.map((feature, index) => (
             <GridItem key={index} colSpan={1}>
               <MotionBox variants={cardVariants}>
-                <ChakraLink
-                  as={feature.link ? NextLink : Box}
-                  href={feature.link}
-                  _hover={{ textDecoration: 'none' }}
-                >
+                {feature.link ? (
+                  <NextLink href={feature.link} passHref>
+                    <Box
+                      as="a"
+                      _hover={{ textDecoration: 'none' }}
+                      display="block"
+                    >
+                      <Box
+                        bg={feature.highlight ? highlightBg : cardBg}
+                        p={8}
+                        rounded="lg"
+                        shadow={cardShadow}
+                        h="100%"
+                        transition="all 0.3s ease"
+                        borderWidth={feature.highlight ? '2px' : '1px'}
+                        borderColor={feature.highlight ? 'blue.200' : 'transparent'}
+                        _hover={{
+                          transform: 'translateY(-5px)',
+                          shadow: 'xl'
+                        }}
+                        position="relative"
+                      >
+                        {feature.badge && (
+                          <Badge 
+                            colorScheme="blue" 
+                            position="absolute" 
+                            top={-2} 
+                            right={-2}
+                            px={2}
+                            py={1}
+                            borderRadius="full"
+                            fontSize="xs"
+                          >
+                            {feature.badge}
+                          </Badge>
+                        )}
+                        {feature.new && (
+                          <Badge 
+                            colorScheme="green" 
+                            position="absolute" 
+                            top={-2} 
+                            right={-2}
+                            px={2}
+                            py={1}
+                            borderRadius="full"
+                            fontSize="xs"
+                          >
+                            New
+                          </Badge>
+                        )}
+                        <Flex
+                          align="center"
+                          justify="center"
+                          w={12}
+                          h={12}
+                          mb={6}
+                          rounded="full"
+                          bg={iconBg}
+                          color={iconColor}
+                          _hover={{
+                            transform: 'rotate(10deg) scale(1.1)',
+                            transition: '0.3s'
+                          }}
+                        >
+                          <Icon as={feature.icon} w={6} h={6} />
+                        </Flex>
+                        <Heading
+                          as="h3"
+                          size="md"
+                          mb={3}
+                          color={headingTextColor}
+                        >
+                          {feature.title}
+                        </Heading>
+                        <Text color={textColor} fontSize="md" mb={2}>
+                          {feature.descriptionKey ? (
+                            <chakra.span
+                              dangerouslySetInnerHTML={{
+                                __html: t(feature.descriptionKey, { defaultValue: '' }),
+                              }}
+                            />
+                          ) : (
+                            feature.description
+                          )}
+                        </Text>
+                        {feature.stats && (
+                          <Text fontSize="sm" color="blue.400" fontWeight="medium">
+                            {feature.stats}
+                          </Text>
+                        )}
+                      </Box>
+                    </Box>
+                  </NextLink>
+                ) : (
                   <Box
                     bg={feature.highlight ? highlightBg : cardBg}
                     p={8}
@@ -236,7 +316,15 @@ const Features = () => {
                       {feature.title}
                     </Heading>
                     <Text color={textColor} fontSize="md" mb={2}>
-                      {feature.description}
+                      {feature.descriptionKey ? (
+                        <chakra.span
+                          dangerouslySetInnerHTML={{
+                            __html: t(feature.descriptionKey, { defaultValue: '' }),
+                          }}
+                        />
+                      ) : (
+                        feature.description
+                      )}
                     </Text>
                     {feature.stats && (
                       <Text fontSize="sm" color="blue.400" fontWeight="medium">
@@ -244,7 +332,7 @@ const Features = () => {
                       </Text>
                     )}
                   </Box>
-                </ChakraLink>
+                )}
               </MotionBox>
             </GridItem>
           ))}

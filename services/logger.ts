@@ -1,5 +1,7 @@
 // services/logger.ts
-let logger: any = null;
+import type { Logger } from 'winston';
+
+let logger: Logger | any = null;
 
 if (typeof window === 'undefined') {
   const winston = require('winston');
@@ -17,6 +19,7 @@ if (typeof window === 'undefined') {
     ],
   });
 } else {
+  // Dummy logger for client-side to avoid errors
   logger = {
     info: () => {},
     error: () => {},

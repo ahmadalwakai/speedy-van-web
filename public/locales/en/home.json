@@ -10,6 +10,10 @@
   "keywords": "Van Delivery UK, Fast Transport Service, Affordable Moving UK, Book Van Service, Reliable Delivery UK",
   "ogTitle": "Speedy Van | Fast Van Delivery Across the UK",
   "ogDescription": "Affordable and reliable van transport services. Book your delivery today!",
+  "heroDescriptionTitle": "Same Day & Affordable Van Delivery Services Across the UK | Trusted by 10,000+ Customers",
+  "heroDescriptionText1": "Looking for hassle-free, <strong>same day delivery</strong>? Speedy Van offers fast, secure, and affordable transport services throughout the UK.",
+  "heroDescriptionText2": "Enjoy <strong>insured deliveries</strong>, lightning-fast service, transparent pricing, and 24/7 customer support. Join 10,000+ happy customers today!",
+  "heroDescriptionText3": "We cover all major cities including London, Manchester, Birmingham, and more. Whether you're moving furniture or sending packages — Speedy Van is your <strong>trusted UK van service</strong>.",
   "customerPortal": "Go to Customer Portal",
   "becomeDriver": "Become a Driver",
   "features": {
@@ -18,7 +22,8 @@
     "description": "Discover the benefits of using our service.",
     "fastDelivery": {
       "title": "Fast Delivery",
-      "description": "We ensure your items arrive on time, every time."
+      "description": "We ensure your items arrive on time, every time. Over 10,000 successful deliveries.",
+      "stats": "10,000+ deliveries"
     },
     "securePayment": {
       "title": "Secure Payment",
@@ -46,30 +51,33 @@
   "citiesWeCover": "Cities We Cover",
   "testimonials": {
     "title": "What Our Customers Say",
-    "testimonial1": "Delivered my furniture in record time!",
-    "testimonial2": "The chat booking was so easy!",
-    "testimonial3": "Reliable and affordable!"
+    "testimonial1": "Delivered my furniture in record time! – John D.",
+    "testimonial2": "The chat booking was so easy! – Sarah M.",
+    "testimonial3": "Reliable and affordable! – Ahmed K."
   },
   "pricing": {
     "title": "Our Plans",
-    "description": "Choose the plan that suits you best. Check our <a href='/pricing'>affordable pricing plans</a>.",
+    "description": "Choose the plan that suits you best. Learn more about our <a href='/pricing'>affordable pricing plans</a>.",
     "basic": {
       "title": "Basic",
       "price": "£10/month",
       "features": ["1 Delivery per week", "Basic Support", "Access to Dashboard"],
-      "buttonText": "Get Started"
+      "buttonText": "Get Started",
+      "buttonAction": "Starting your Basic plan..."
     },
     "premium": {
       "title": "Premium",
       "price": "£25/month",
       "features": ["5 Deliveries per week", "Priority Support", "Advanced Dashboard"],
-      "buttonText": "Upgrade Now"
+      "buttonText": "Upgrade Now",
+      "buttonAction": "Upgrading to Premium plan..."
     },
     "enterprise": {
       "title": "Enterprise",
       "price": "£50/month",
       "features": ["Unlimited Deliveries", "24/7 Support", "Full Dashboard Access"],
-      "buttonText": "Contact Sales"
+      "buttonText": "Contact Sales",
+      "buttonAction": "Contacting sales for Enterprise plan..."
     }
   },
   "faqTitle": "Frequently Asked Questions",
@@ -91,5 +99,8 @@
     "learnMore": "Learn more",
     "accept": "Accept",
     "decline": "Decline"
-  }
+  },
+  "footerAbout": "Fast and reliable delivery across the UK.",
+  "footerLinks": "Quick Links",
+  "footerContact": "Contact"
 }

@@ -7,3 +7,6 @@ Disallow: /api
 
 # Sitemap location
 Sitemap: https://speedy-van.co.uk/sitemap.xml
+
+# Contact Information
+# For inquiries, reach out to info@speedy-van.co.uk or visit https://speedy-van.co.uk/contact

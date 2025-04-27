@@ -57,12 +57,12 @@ const SupportChat: React.FC = () => {
         anonymous: true
       });
       setSessionId(sessionRef.id);
-      botReply(`👋 Hi! I'm **SpeedyBot** 🤖, your assistant. How can I help you today?\n\n💡 Common Questions:\n- How do I book a delivery?\n- What are your working hours?\n- How is the price calculated?`);
+      botReply(`👋 Hi! I'm **SpeedyBot** 🤖, your assistant. How can I help you today?\n\n💡 Common Questions:\n- How do I book a delivery?\n- What are your working hours?\n- How is the price calculated?\n\n📧 For further assistance, email us at support@speedy-van.co.uk`);
     } catch (error) {
       console.error("Chat initialization error:", error);
       toast({
         title: "Chat Unavailable",
-        description: "Our chat service is currently unavailable. Please try again later or contact support directly.",
+        description: "Our chat service is currently unavailable. Please try again later or contact support@speedy-van.co.uk.",
         status: "error",
         duration: 5000,
         isClosable: true,
@@ -113,9 +113,9 @@ const SupportChat: React.FC = () => {
     } else {
       try {
         const res = await axios.post('/api/ai-chat', { message: cleaned });
-        botReply(res.data.reply || "🤖 I'm still learning! You can email support@speedyvan.com.");
+        botReply(res.data.reply || "🤖 I'm still learning! You can email support@speedy-van.co.uk.");
       } catch (error) {
-        botReply("🤖 Sorry, I'm having trouble connecting to the AI service. Please try again or email support@speedyvan.com.");
+        botReply("🤖 Sorry, I'm having trouble connecting to the AI service. Please try again or email support@speedy-van.co.uk.");
       }
     }
 
@@ -134,7 +134,7 @@ const SupportChat: React.FC = () => {
         botReply("💡 To get a quote, start a booking and enter your details for an instant price.");
         break;
       case 'contact support':
-        botReply("📞 You can reach us at support@speedyvan.com or call +44 7901 846297.");
+        botReply("📞 You can reach us at support@speedy-van.co.uk or call +44 7901 846297.");
         break;
     }
   };
@@ -153,7 +153,7 @@ const SupportChat: React.FC = () => {
       await saveMessage(userMsg);
       setMessages(prev => [...prev, userMsg]);
     } catch (error) {
-      botReply("❌ Failed to upload attachment. Please try again.");
+      botReply("❌ Failed to upload attachment. Please try again or email support@speedy-van.co.uk.");
     } finally {
       setUploading(false);
     }

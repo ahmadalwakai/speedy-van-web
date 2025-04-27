@@ -8,8 +8,10 @@ import {
   VStack,
   Button,
   useColorModeValue,
+  chakra,
 } from '@chakra-ui/react';
 import { useTranslation } from 'next-i18next';
+import NextLink from 'next/link';
 
 interface PricingPlan {
   title: string;
@@ -58,7 +60,18 @@ const Pricing: React.FC = () => {
             {t('pricing.title')}
           </Heading>
           <Text fontSize="lg" color={textColor}>
-            {t('pricing.description')}
+            <chakra.span
+              dangerouslySetInnerHTML={{
+                __html: t('pricing.description', {
+                  defaultValue: 'Choose the plan that suits you best. Check our <a href="/pricing">affordable pricing plans</a>.',
+                }),
+              }}
+            />
+          </Text>
+          <Text fontSize="md" color={textColor}>
+            {t('pricing.billingContact', {
+              defaultValue: 'For billing inquiries, contact us at billing@speedy-van.co.uk.',
+            })}
           </Text>
         </VStack>
 
@@ -95,10 +108,11 @@ const Pricing: React.FC = () => {
                   )}
                 </VStack>
                 <Button
+                  as={NextLink}
+                  href="/pricing"
                   colorScheme="blue"
                   size="lg"
                   w="full"
-                  onClick={plan.buttonAction}
                 >
                   {plan.buttonText}
                 </Button>

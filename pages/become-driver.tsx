@@ -38,13 +38,11 @@ import { db, storage } from '@/services/firebase';
 import { collection, addDoc } from 'firebase/firestore';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 
-// Log to confirm page compilation
 console.log('Compiling become-driver.tsx');
 
 const MotionBox = motion(Box);
 const MotionButton = motion(Button);
 
-// Define FormData interface
 interface FormData {
   firstName: string;
   lastName: string;
@@ -65,7 +63,6 @@ interface FormData {
   privacyAgreed: boolean;
 }
 
-// Validation schema using Yup
 const validationSchema = Yup.object({
   firstName: Yup.string().required('First name is required'),
   lastName: Yup.string().required('Last name is required'),
@@ -143,18 +140,16 @@ const BecomeDriver: React.FC = () => {
     },
   });
 
-  // Auto-save to LocalStorage
   const formValues = watch();
+
   useEffect(() => {
     localStorage.setItem('driverApplicationDraft', JSON.stringify(formValues));
   }, [formValues]);
 
-  // Load draft from LocalStorage on mount
   useEffect(() => {
     const draft = localStorage.getItem('driverApplicationDraft');
     if (draft) {
       const parsedDraft = JSON.parse(draft);
-      // Ensure drivingLicenceExpiry is a Date or undefined
       if (parsedDraft.drivingLicenceExpiry) {
         parsedDraft.drivingLicenceExpiry = new Date(parsedDraft.drivingLicenceExpiry);
       }
@@ -175,8 +170,13 @@ const BecomeDriver: React.FC = () => {
       const uploadPromises = Object.entries(files).map(async ([key, file]) => {
         if (!file) return null;
         const storageRef = ref(storage, `driverApplications/${data.email}/${key}`);
-        await uploadBytes(storageRef, file);
-        return getDownloadURL(storageRef);
+        try {
+          await uploadBytes(storageRef, file);
+          return getDownloadURL(storageRef);
+        } catch (error) {
+          console.error(`Error uploading ${key}:`, error);
+          throw new Error(`Failed to upload ${key}. Please email the document to documents@speedy-van.co.uk.`);
+        }
       });
 
       const urls = await Promise.all(uploadPromises);
@@ -218,12 +218,12 @@ const BecomeDriver: React.FC = () => {
       });
 
       localStorage.removeItem('driverApplicationDraft');
-      setStep(6); // Success step
-    } catch (error) {
+      setStep(6);
+    } catch (error: any) {
       console.error('Submission error:', error);
       toast({
         title: 'Error',
-        description: 'Failed to submit application. Please try again.',
+        description: error.message || 'Failed to submit application. Please try again or contact documents@speedy-van.co.uk.',
         status: 'error',
         duration: 5000,
         isClosable: true,
@@ -255,7 +255,6 @@ const BecomeDriver: React.FC = () => {
       </Head>
 
       <Box bg={bgColor} color={textColor} minH="100vh" py={12} position="relative">
-        {/* Floating Contact Button */}
         <IconButton
           as="a"
           href="tel:+447901846297"
@@ -270,7 +269,6 @@ const BecomeDriver: React.FC = () => {
           zIndex={10}
         />
 
-        {/* Hero Section */}
         <MotionBox
           as={Container}
           maxW="7xl"
@@ -297,20 +295,9 @@ const BecomeDriver: React.FC = () => {
             >
               {t('common:startApplication', { defaultValue: 'Start Your Application' })}
             </Button>
-            {/* Add driver-van.png and fallback.png to public/illustrations if enabling */}
-            {/* <Image
-              src="/illustrations/driver-van.png"
-              alt="Driver with Van"
-              maxW={{ base: '300px', md: '400px' }}
-              mx="auto"
-              mt={8}
-              loading="lazy"
-              fallbackSrc="/illustrations/fallback.png"
-            /> */}
           </Stack>
         </MotionBox>
 
-        {/* Why Drive With Us */}
         <MotionBox
           as={Container}
           maxW="7xl"
@@ -339,7 +326,6 @@ const BecomeDriver: React.FC = () => {
           </SimpleGrid>
         </MotionBox>
 
-        {/* Requirements */}
         <MotionBox
           as={Container}
           maxW="7xl"
@@ -375,7 +361,6 @@ const BecomeDriver: React.FC = () => {
           </List>
         </MotionBox>
 
-        {/* Multi-Step Application Form */}
         <MotionBox
           as={Container}
           maxW="3xl"
@@ -652,7 +637,6 @@ const BecomeDriver: React.FC = () => {
           </Box>
         </MotionBox>
 
-        {/* Need Help with Documents */}
         <MotionBox
           as={Container}
           maxW="7xl"
@@ -683,7 +667,6 @@ const BecomeDriver: React.FC = () => {
           </List>
         </MotionBox>
 
-        {/* FAQ */}
         <MotionBox
           as={Container}
           maxW="7xl"

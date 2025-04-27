@@ -1,8 +1,9 @@
 import React from 'react';
-import { Box, Heading, Text, useColorModeValue, Container, SimpleGrid, Tag } from '@chakra-ui/react';
+import { Box, Heading, Text, useColorModeValue, Container, SimpleGrid, Tag, chakra } from '@chakra-ui/react';
 import { useTranslation } from 'next-i18next';
 import { motion, useReducedMotion, type Variants } from 'framer-motion';
 import dynamic from 'next/dynamic';
+import NextLink from 'next/link';
 
 // Dynamically import MapboxMap with fallback loader
 const MapboxMap = dynamic(() => import('@/components/MapboxMap'), {
@@ -67,7 +68,13 @@ const Coverage: React.FC = () => {
           {t('coverageTitle', { defaultValue: 'Our Coverage' })}
         </Heading>
         <Text fontSize="lg" color={textColor} maxW="2xl" mx="auto" mb={8} textAlign="center">
-          {t('coverageDesc', { defaultValue: 'We deliver across the UK, from cities to rural areas.' })}
+          <chakra.span
+            dangerouslySetInnerHTML={{
+              __html: t('coverageDesc', {
+                defaultValue: 'We deliver across the UK, from cities to rural areas. Learn more about our <a href="/coverage">UK coverage areas</a>.',
+              }),
+            }}
+          />
         </Text>
 
         <Box

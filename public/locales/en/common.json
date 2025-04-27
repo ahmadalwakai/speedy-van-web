@@ -13,7 +13,7 @@
   "bookNow": "Book Now",
   "contactUs": "Contact Us",
   "about": "About Us",
-  "contact": "Contact",
+  "contact": "Contact Us",
   "terms": "Driver Terms & Conditions",
   "privacy": "Privacy Policy",
   "loading": "Loading...",
@@ -78,5 +78,8 @@
   "faqQuestion2": "Do I need my own van?",
   "faqAnswer2": "Yes, you need to own or rent a van in good condition.",
   "faqQuestion3": "What areas do you cover?",
-  "faqAnswer3": "We operate across the UK, with opportunities in most major cities."
+  "faqAnswer3": "We operate across the UK, with opportunities in most major cities.",
+  "emailLabel": "Email",
+  "phoneLabel": "Phone",
+  "getQuote": "Get Free Quote"
 }
